@@ -1,0 +1,335 @@
+{% extends "home/hom.html" %}
+
+{% block intro %}{% endblock %}
+
+
+<div class="app-body">
+    <!--left sidebar start-->
+    <div class="left-nav-wrap">
+        <div class="left-sidebar">
+            <nav class="sidebar-menu">
+                <ul id="nav-accordion">
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="active">
+                            <i class=" ti-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="/my_count/" class="active">
+                            <i class="fa fa-user"></i>
+                            <span>Perfil del Usuario</span>
+                        </a>
+                    </li>
+                    <li class="nav-title">
+                        <h5 class="text-uppercase"><i class="fa fa-cogs"></i>Opciones</h5>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="/my_count/tikest/" class="active">
+                            <i class="fa fa-ticket"></i>
+                            <span>Mis Tikets</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="/my_count/mount/" class="active">
+                            <i class="fa fa-money"></i>
+                            <span>Balances y Recargas</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!--left sidebar end-->
+
+    <!--main content wrapper-->
+    <div class="content-wrapper">
+
+        <div class="container-fluid">
+            {% block contenido %}
+                <!--sales statistical overview-->
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="row">
+                            <div class=" col-12">
+                                <div class="card card-shadow bg-success mb-4 py-2">
+                                    <div class="card-body">
+                                        <div class="float-right">
+                                            <i class="vl_graph-bar fa-3x text-muted"></i>
+                                        </div>
+                                        <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">
+                                            Revenue</h5>
+                                        <h2 class="mt-3 mb-3">3,432</h2>
+                                        <p class="mb-0 text-muted">
+                                            <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> 1.43%</span>
+                                            <span class="float-right">Since last month</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-12">
+                                <div class="card bg-primary text-white mb-4 py-1">
+                                    <div class="card-body">
+                                        <div class="float-right">
+                                            <i class="vl_shopping-bag2 fa-3x text-white"></i>
+                                        </div>
+                                        <h5 class=" font-weight-normal mt-0" title="Number of Orders">Growth</h5>
+                                        <h2 class="mt-3 mb-3 text-white">32,879</h2>
+                                        <p class="mb-0 ">
+                                            <span class=" mr-2"><i class="fa fa-arrow-up"></i> 3.23%</span>
+                                            <span class="float-right">Since last month</span>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-8">
+                        <div class="card card-shadow mb-4">
+                            <div class="card-header border-0">
+                                <div class="custom-title-wrap bar-primary">
+                                    <div class="custom-title">Sales Report</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="bar-chart-js" height="240"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/sales statistical overview-->
+
+                <div class="row">
+                    <div class="col-xl-8 col-md-12">
+                        <div class="card card-shadow mb-4">
+                            <div class="card-header border-0">
+                                <div class="custom-title-wrap bar-primary">
+                                    <div class="custom-title">Today's Activity</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled base-timeline">
+                                    <li class="time-dot-primary">
+                                        <div class="base-timeline-info">
+                                            <a href="#">John123</a> Successfully purchased item#26
+                                        </div>
+                                        <small class="text-muted">
+                                            28 mins ago
+                                        </small>
+                                    </li>
+                                    <li class="time-dot-danger">
+                                        <div class="base-timeline-info">
+                                            <a href="#" class="text-danger">Farnandez</a> placed the order for
+                                            accessories
+                                        </div>
+                                        <small class="text-muted">
+                                            2 days ago
+                                        </small>
+                                    </li>
+                                    <li class="time-dot-purple">
+                                        <div class="base-timeline-info">
+                                            User <a href="#" class="text-purple">Lisa Maria</a> checked out from the
+                                            market
+                                        </div>
+                                        <small class="text-muted">
+                                            12 mins ago
+                                        </small>
+                                    </li>
+                                    <li class="time-dot-turquoise">
+                                        <div class="base-timeline-info">
+                                            <a href="#" class="text-info">Charlie Johnson </a> joined DashLab last week.
+                                            Congrats to him
+                                        </div>
+                                        <small class="text-muted">
+                                            3 days ago
+                                        </small>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-12">
+                        <div class="card card-shadow mb-4">
+                            <div class="card-header border-0">
+                                <div class="custom-title-wrap bar-danger">
+                                    <div class="custom-title">Chat</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chat-wrap" style="height: 280px">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <div class="chat-info">
+                                                <div class="chat-avatar mr-3">
+                                                    <img src="/static/oTransporte/assets/img/avatar/avatar-mini1.jpg"
+                                                         alt=""/>
+                                                </div>
+                                                <div class="chat-text">
+                                                    Hi Pristly, How are you?
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="sender">
+                                            <div class="chat-info">
+                                                <div class="chat-text">
+                                                    I am fine. Danny I need a
+                                                    help from you. It will be
+                                                    great for me if you can
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="chat-info">
+                                                <div class="chat-avatar mr-3">
+                                                    <img src="/static/oTransporte/assets/img/avatar/avatar-mini1.jpg"
+                                                         alt=""/>
+                                                </div>
+                                                <div class="chat-text">
+                                                    oh sure tell me, if i can
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="sender">
+                                            <div class="chat-info">
+                                                <div class="chat-text">
+                                                    I need a dashboard for my project
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="chat-info">
+                                                <div class="chat-avatar mr-3">
+                                                    <img src="/static/oTransporte/assets/img/avatar/avatar-mini1.jpg"
+                                                         alt=""/>
+                                                </div>
+                                                <div class="chat-text">
+                                                    ok, how can i help you?
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="sender">
+                                            <div class="chat-info">
+                                                <div class="chat-text">
+                                                    can you make a design for this
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="chat-info">
+                                                <div class="chat-avatar mr-3">
+                                                    <img src="/static/oTransporte/assets/img/avatar/avatar-mini1.jpg"
+                                                         alt=""/>
+                                                </div>
+                                                <div class="chat-text">
+                                                    Yeah sure, I'll give you a design next week
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0 pt-0 chat-type">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <a href="javascript:;" class="file-attachment float-left">
+                                            <i class="fa fa-paperclip"></i>
+                                        </a>
+                                        <input type="text" class="form-control border-0 f14"
+                                               placeholder="Type something here"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="javascript:;" class="btn-todo-list btn-primary float-right mt-1">
+                                            <i class="fa fa-paper-plane"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            {% endblock %}
+        </div>
+{% block footer %}
+<!--footer-->
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright &copy; Aicrux 2020</small>
+                </div>
+            </div>
+        </footer>
+        <!--/footer-->
+{% endblock %}
+
+    </div>
+</div>
+<!--basic scripts-->
+<script src="/static/oTransporte/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/static/oTransporte/assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/oTransporte/assets/vendor/popper.min.js"></script>
+<script src="/static/oTransporte/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/oTransporte/assets/vendor/jquery.dcjqaccordion.2.7.js"></script>
+<script src="/static/oTransporte/assets/vendor/jquery.nicescroll.min.js"></script>
+
+
+
+<!--flot chart-->
+<script src="/static/oTransporte/assets/vendor/flot/jquery.flot.min.js"></script>
+<script src="/static/oTransporte/assets/vendor/flot/jquery.flot.pie.min.js"></script>
+<script src="/static/oTransporte/assets/vendor/flot/jquery.flot.tooltip.min.js"></script>
+
+
+<!--to do list-->
+<script src="/static/oTransporte/assets/vendor/icheck/skins/icheck.min.js"></script>
+<!--to do list initialization-->
+<script src="/static/oTransporte/assets/vendor/js-init/init-todo-list.js"></script>
+{% block script %}
+    <!--flot chart initialization-->
+<script src="/static/oTransporte/assets/vendor/js-init/flot/init-flot-widget.js"></script>
+<!--chartjs-->
+<script src="/static/oTransporte/assets/vendor/chartjs/Chart.bundle.min.js"></script>
+<!--chartjs initialization-->
+<script src="/static/oTransporte/assets/vendor/js-init/chartjs/init-bar-chartjs.js"></script>
+{% endblock %}
+<!--[if lt IE 9]>
+<script src="/static/oTransporte/assets/vendor/modernizr.js"></script>
+<![endif]-->
+
+<!--basic scripts initialization-->
+<script src="/static/oTransporte/assets/js/scripts.js"></script>
+<style>
+    .left-sidebar-color .left-sidebar .sidebar-menu {
+        background: {{ global.color_principal }};
+    }
+    .btn-primary {
+    border: none;
+    background: {{ global.color_principal }} !important;
+}
+
+    .left-sidebar-color .left-sidebar .sidebar-menu ul li a.active, .left-sidebar-color .left-sidebar .sidebar-menu ul li a:hover, .left-sidebar-color .left-sidebar .sidebar-menu ul li a:focus {
+    color: {{ global.color_textos }};
+    background: transparent;
+}
+
+    .left-sidebar-color .left-sidebar .sidebar-menu ul li a.active i, .left-sidebar-color .left-sidebar .sidebar-menu ul li a:hover i, .left-sidebar-color .left-sidebar .sidebar-menu ul li a:focus i {
+    color: {{ global.color_textos }};
+}
+
+    .left-sidebar .nav-title h5 {
+    margin-bottom: 10px;
+    padding-left: 1.5rem;
+    letter-spacing: 1px;
+    opacity: .3;
+    color:{{ global.color_textos }};
+    font-size: 11px;
+}
+
+</style>
+
+</body>
+</html>
+

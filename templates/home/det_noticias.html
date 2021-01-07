@@ -1,0 +1,146 @@
+{% extends 'home/hom.html' %}
+{% block intro %}{%  endblock %}
+{% block meta %}
+<meta property="og:url"           content="{% url 'detnoticia' noticia.id %}">
+<meta property="og:type"          content="website">
+<meta property="og:title"         content="{{ noticia.titulo }}">
+<meta property="og:description"   content="{{ noticia.metadatos }}">
+<meta property="og:image"         content="http://sisepuede.elguabo.gob.ec/media/{{ noticia.portada }}">
+{% endblock %}
+
+{% block contenido %}
+    {% load static %}
+<div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/es_EC/sdk.js#xfbml=1&version=v3.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+<main class="page_main_wrapper">
+            <!-- START PAGE TITLE -->
+            <div class="page-title">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            {% if noticia.titulo %}
+                            <h4><strong>{{ noticia.titulo }}</strong></h4>
+                            {% endif %}
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <ol class="breadcrumb">
+                                <li><a href="/">Inicio</a></li>
+                                <li class="active"><a href="{% url 'detnoticia' noticia.id %}"> noticias</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END OF /. PAGE TITLE -->
+            <div class="container">
+                <div class="row row-m">
+                    <!-- START MAIN CONTENT -->
+                    <div class="col-sm-8 col-p  main-content">
+                        <div class="theiaStickySidebar">
+                            <div class="post_details_inner">
+                                <div class="post_details_block details_block3">
+
+                                    <img class="img-thumbnail" src="/media/{{ noticia.portada }}" alt="" style="width: 100%">
+                                    <br><br>
+                                    <div class="posts__footer card__footer">
+                                        <div class="sharethis-inline-share-buttons"></div>
+                                    <ul class="post-meta">
+                                        <li class="meta-item "><i class="ti-eye"></i> {{ noticia.visitas }}</li>
+                                    </ul>
+                                </div>
+                                    {{ noticia.detalles }}
+                                </div>
+                                <div class="sharethis-inline-reaction-buttons"></div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- END OF /. MAIN CONTENT -->
+                    <!-- START SIDE CONTENT -->
+                    <div class="col-sm-4 col-p rightSidebar">
+                        <div class="theiaStickySidebar">
+                            <!-- END OF /. SOCIAL ICON -->
+
+                            <!-- START NAV TABS -->
+                            <div class="tabs-wrapper">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Los más vistos</a></li>
+                                </ul>
+                                <!-- Tab panels one -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="home">
+
+                                        <div class="most-viewed">
+                                            <ul id="most-today" class="content tabs-content">
+                                               {% for popular in populares %}
+                                                    <li><span class="count">{{ forloop.counter }}</span><span class="text"><a href="{% url 'detnoticia' popular.id %}">{{ popular.titulo }}</a> ( {{ popular.visitas }} )</span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- Tab panels two -->
+                                    <div role="tabpanel" class="tab-pane fade" id="profile">
+                                        <div class="popular-news">
+                                            <div class="p-post">
+                                                <h4><a href="#">It is a long established fact that a reader will be distracted by  </a></h4>
+                                                <ul class="authar-info">
+                                                    <li><a href="#" class="link"><i class="ti-timer"></i> May 15, 2016</a></li>
+                                                    <li><a href="#" class="link"><i class="ti-thumb-up"></i>15 likes</a></li>
+                                                </ul>
+                                                <div class="reatting-2">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                            </div>
+                                            <div class="p-post">
+                                                <h4><a href="#">It is a long established fact that a reader will be distracted by  </a></h4>
+                                                <ul class="authar-info">
+                                                    <li><a href="#" class="link"><i class="ti-timer"></i> May 15, 2016</a></li>
+                                                    <li><a href="#" class="link"><i class="ti-thumb-up"></i>15 likes</a></li>
+                                                </ul>
+                                                <div class="reatting-2">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                            </div>
+                                            <div class="p-post">
+                                                <h4><a href="#">It is a long established fact that a reader will be distracted by  </a></h4>
+                                                <ul class="authar-info">
+                                                    <li><a href="#" class="link"><i class="ti-timer"></i> May 15, 2016</a></li>
+                                                    <li><a href="#" class="link"><i class="ti-thumb-up"></i>15 likes</a></li>
+                                                </ul>
+                                                <div class="reatting-2">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END OF /. NAV TABS -->
+                        </div>
+                    </div>
+                    <!-- END OF /. SIDE CONTENT -->
+                </div>
+            </div>
+        </main>
+{% endblock %}

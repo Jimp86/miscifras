@@ -1,0 +1,110 @@
+{% extends 'home/hom.html' %}
+{% block intro %}{% endblock %}
+{% block contenido %}
+    {%  load static %}
+        <!-- START PAGE TITLE -->
+        <div class="page-title">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <h1><strong>Mantenente Informado</strong> Sección de Noticias</h1>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <ol class="breadcrumb">
+                            <li><a href="/">Inicio</a></li>
+                            <li class="active"><a href="{% url 'noticias' %}">Sección de Noticias</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF /. PAGE TITLE -->
+        <!-- *** START PAGE MAIN CONTENT *** -->
+        <main class="page_main_wrapper">
+            <div class="container">
+                <div class="row row-m">
+                    <!-- START MAIN CONTENT -->
+                    <div class="col-sm-8 col-p  main-content">
+                        <div class="theiaStickySidebar">
+                            <!-- START CARD POST -->
+                            <div class="row row-m">
+                                {% for noticia in noticias %}
+                                    <div class="col-sm-6 col-p">
+                                        <div class="posts card-post">
+                                            <div class="post-grid post-grid-item">
+                                                <figure class="posts-thumb">
+                                                    <span class="post-category">{{ noticia.categoria }}</span>
+                                                    <a href="{% url 'detnoticia' noticia.id %}"><img src="/media/{{ noticia.portada }}" style="width: 378px!important; height: 270px!important;" alt=""></a>
+                                                </figure>
+                                                <div class="posts-inner">
+                                                    <a href="{% url 'detnoticia' noticia.id %}" class="posts-link"></a>
+                                                     <ul class="authar-info">
+                                                        <li><i class="ti-timer"></i> {{ noticia.fecha|date:"M d, Y" }}</li>
+                                                        <li><a href="#" class="link"><i class="ti-thumb-up"></i>{{ noticia.visitas }} Visitas</a></li>
+                                                    </ul>
+                                                        <h6 class="posts-title"><a href="#">{{ noticia.titulo|truncatewords:5 }}</a></h6>
+                                                    <p>
+                                                        {% if noticia.detalles %}
+                                                        {{ noticia.detalles|safe|truncatewords:20 }}
+                                                        {% endif %}
+                                                    </p>
+                                                </div>
+                                                <div class="posts__footer card__footer">
+                                                    <div class="post-author">
+                                                        <figure class="post-author-avatar hidden-xs">
+                                                            <img src="{% static 'pagina/assets/images/avatar-1.jpg' %}" alt="Post Author Avatar">
+                                                        </figure>
+                                                        <div class="post-author-info ">
+                                                            <h4 class="post-author-name">WebAdmin</h4>
+                                                        </div>
+                                                    </div>
+                                                    <ul class="post-meta">
+                                                        <li class="meta-item "><i class="ti-eye"></i> {{ noticia.visitas }} Visitas</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <!-- END OF /. CARD POST -->
+                        </div>
+                    </div>
+                    <!-- END OF /. MAIN CONTENT -->
+                    <!-- START SIDE CONTENT -->
+                    <div class="col-sm-4 col-p rightSidebar">
+                        <div class="theiaStickySidebar">
+                            <!-- START SOCIAL ICON -->
+                            <!-- END OF /. SOCIAL ICON -->
+                            <!-- START ADVERTISEMENT -->
+
+                            <!-- END OF /. ADVERTISEMENT -->
+                            <!-- START NAV TABS -->
+                            <div class="tabs-wrapper">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Los más vistos</a></li>
+                                </ul>
+                                <!-- Tab panels one -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="home">
+
+                                        <div class="most-viewed">
+                                            <ul id="most-today" class="content tabs-content">
+                                                {% for popular in populares %}
+                                                    <li><span class="count">{{ forloop.counter }}</span><span class="text"><a href="{% url 'detnoticia' popular.id %}">{{ popular.titulo }}</a> ( {{ popular.visitas }} )</span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END OF /. NAV TABS -->
+                        </div>
+                    </div>
+                    <!-- END OF /. SIDE CONTENT -->
+                </div>
+            </div>
+        </main>
+        <!-- *** END OF /. PAGE MAIN CONTENT *** -->
+        <!-- START FOOTER -->
+{% endblock %}

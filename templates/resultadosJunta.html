@@ -1,0 +1,103 @@
+{% extends 'seleccionar.html' %}
+{% block contenido %}
+    {% load contadores %}
+    <div class="input-group mb-3">
+      <select name="cambiar" id="cambiar" class="form-control">
+            {% for junta in juntas %}
+                <option value="{{ junta.id }}">{{ junta }}</option>
+            {% endfor %}
+
+        </select>
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" id="buscar">Buscar</button>
+          </div>
+        </div>
+    <div class="card text-center">
+        <div class="card-header">
+            COMISIOS ELECTORALES 2019 - ALCALDE
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">RESULTADOS POR JUNTA: {{ junta }} </h5>
+            <p class="card-text">
+                <canvas id="myChart" width="400" height="180" style="font-size: 10px"></canvas>
+            </p>
+        </div>
+        <div class="card-footer text-muted">
+            Datos segun registro de delegados.
+        </div>
+    </div>
+    <br><br>
+    <div class="card text-center">
+        <div class="card-header">
+            RESUMEN
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">RESULTADOS POR JUNTA: {{ junta }} </h5>
+            <p class="card-text">
+                {% for alcalde in alcaldes %}
+                    <div class="row" style="text-align: justify">
+                        <div class="col-lg-3">{{ alcalde.nombre }}</div>
+                        <div class="col-lg-9">{% cuenta_por_candidato_junta alcalde.id junta.id %}</div>
+                    </div>
+
+                {% endfor %}
+
+            </p>
+        </div>
+        <div class="card-footer text-muted">
+            Datos segun registro de delegados. <a href="/" class="btn btn-primary"> Volver</a>
+        </div>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+var labels=[]
+var datos=[]
+{% for i in alcaldes %}
+    labels.push("{{ i.nombre }}")
+    datos.push({% cuenta_por_candidato_junta i.id junta.id %})
+{% endfor %}
+console.log(labels)
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels:labels,
+        datasets: [{
+            label: '# de Votos',
+            data: datos,
+            backgroundColor: [
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 206, 86, 1)',
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+    <script>
+    $("#buscar").click(function(){
+        window.location="/rjunta/"+$("#cambiar").val()+"/";
+    })
+    </script>
+{% endblock %}

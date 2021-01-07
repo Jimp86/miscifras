@@ -1,0 +1,800 @@
+{% block style %}
+    <!DOCTYPE html>
+    {% load static %}
+    <html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Mis Cifras</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Favicons -->
+        <link rel="icon" type="image/png" href="/static/img/favicon.png">
+        <link rel="apple-touch-icon" type="image/png" href="/static/img/apple-touch-icon.png">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700"
+              rel="stylesheet">
+        <!-- Bootstrap CSS File -->
+        <link rel="stylesheet" type="text/css" href="/static/lib/bootstrap/css/bootstrap.min.css">
+        <!-- Libraries CSS Files -->
+        <link rel="stylesheet" type="text/css" href="/static/lib/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/lib/animate/animate.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/lib/ionicons/css/ionicons.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/lib/magnific-popup/magnific-popup.css">
+        <link rel="stylesheet" type="text/css" href="/static/lib/ionicons/css/ionicons.min.css">
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="/static/css/RYPP.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/owl.carousel.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/owl.transitions.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/owl.theme.css">
+
+        <!-- Main Stylesheet File -->
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
+        <!-- =======================================================
+          Theme Name: Reveal
+          Theme URL: https://bootstrapmade.com/reveal-bootstrap-corporate-template/
+          Author: BootstrapMade.com
+          License: https://bootstrapmade.com/license/
+        ======================================================= -->
+    </head>
+{% endblock %}
+
+<body id="body">
+
+{% block social_info %}
+    <!--========================== Top Bar  ============================-->
+    <section id="topbar" class="d-none d-lg-block">
+        <div class="container clearfix">
+            <div class="contact-info float-left">
+                <i class="fa fa-envelope-o"></i> <a href="mailto:contact@example.com">info@miscifras.com</a>
+                <i class="fa fa-phone"></i> +593 989505236
+            </div>
+            <div class="social-links float-right">
+                <a href="https://www.facebook.com/miscifrasec" class="facebook"><i class="fa fa-facebook"></i></a>
+                <a href="https://www.instagram.com/miscifrasec/" class="instagram"><i class="fa fa-instagram"></i></a>
+                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                <a href="#" class="youtube"><i class="fa fa-youtube"></i></a>
+                <a href="#" class="whatsapp"><i class="fa fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block header %}
+    <!--========================== Header ============================-->
+    <header id="header">
+        <div class="container">
+            <div id="logo" class="pull-left">
+                <h1><a href="/" class="scrollto">Mis<span> Cifras</span></a></h1>
+                <!--a href="#body"><img src="img/logo.png" alt="" title="" /></a-->
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="#news">Noticias</a></li>
+                    <!--li><a href="#services">Servicios</a></li-->
+                    <li><a href="#portfolio">Encuestas</a></li>
+                    <li><a href="#about">Nosotros</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="menu-has-children"><a href="">{{ user.username }}</a>
+                            <ul>
+                                <li><a href="/my_account">Mi Cuenta</a></li>
+                                <li><a href="/log_out">Cerrar Sesión</a></li>
+                            </ul>
+                            {% else %}
+                        <li class="menu-has-children"><a href="">Acceso</a>
+                            <ul>
+                                <li><a href="/registro">Registro</a></li>
+                                <li><a href="/log_in">Ingresar</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </header><!-- #header -->
+{% endblock %}
+
+{% block intro %}
+    <!--========================== Intro Section ============================-->
+    <section id="intro">
+        <div class="intro-content">
+            <h2>Plataforma de <span>Encuestas</span><br>Digitales!</h2>
+            {% if user.is_authenticated %}
+            {% else %}
+                <div>
+                    <a href="/registro" class="btn-login" id=""><i class="fa fa-user-plus separar"
+                                                                   aria-hidden="true"></i> Registro</a>
+                    <a href="/log_in" class="btn-register" id=""><i class="fa fa-sign-in separar"
+                                                                    aria-hidden="true"></i> Ingresar</a>
+                </div>
+            {% endif %}
+        </div>
+        <div id="intro-carousel" class="owl-carousel">
+            <div class="item" style="background-image: url('/static/img/intro-carousel/1.jpg');"></div>
+            <div class="item" style="background-image: url('/static/img/intro-carousel/2.jpg');"></div>
+            <div class="item" style="background-image: url('/static/img/intro-carousel/3.jpg');"></div>
+            <div class="item" style="background-image: url('/static/img/intro-carousel/4.jpg');"></div>
+            <div class="item" style="background-image: url('/static/img/intro-carousel/5.jpg');"></div>
+        </div>
+    </section><!-- #intro -->
+{% endblock %}
+
+{% block contenido %}
+    <main id="main">
+        <!--========================== News Section ============================-->
+        <section id="news" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header"><h2>Noticias</h2></div>
+            </div>
+            <div class="slider-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 thm-padding">
+                            <div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    {% for reciente in recientes %}
+                                        {% if forloop.counter == 1 %}
+                                        <div class="carousel-item active">
+                                        {% else %}
+                                            <div class="carousel-item">
+                                        {% endif %}
+
+                                        <img class="d-block w-100 news-image" src="/media/{{ reciente.portada }}" alt="First slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>{{ reciente.titulo }}</h5>
+                                            <p>{{ reciente.fecha }}</p>
+                                          </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls1" role="button"
+                                   data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Anterior</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls1" role="button"
+                                   data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Siguiente</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 thm-padding">
+                            <div id="carouselExampleControls2" class="carousel slide" data-ride="carousel">
+                                {% for reciente in destacadas %}
+                                        {% if forloop.counter == 1 %}
+                                        <div class="carousel-item active">
+                                        {% else %}
+                                            <div class="carousel-item">
+                                        {% endif %}
+
+                                        <img class="d-block w-100 news-image"  src="/media/{{ reciente.portada }}" alt="First slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>{{ reciente.titulo }}</h5>
+                                            <p>{{ reciente.fecha }}</p>
+                                          </div>
+                                    </div>
+                                    {% endfor %}
+                                <a class="carousel-control-prev" href="#carouselExampleControls2" role="button"
+                                   data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Anterior</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls2" role="button"
+                                   data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Siguiente</span>
+                                </a>
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-xs-6 col-sm-6 col-md-6 thm-padding">
+              <div class="slider-wrapper">
+                <div id="owl-slider" class="owl-carousel owl-theme">
+                  <!-- Slider item one -->
+                  {% for noticia in recientes %}
+                    <div class="item">
+                      <div class="slider-post post-height-1">
+                        <a href="{%  url 'detnoticia' noticia.id %}" class="news-image"><img src="media/{{ noticia.portada }}" alt="" class="img-responsive"></a>
+                          <div class="post-text">
+                            <span class="post-category">{{ noticia.categoria.nombre }}</span>
+                            {% if noticia.titulo %}
+                            <h2><a href="#">{{ noticia.titulo }} </a></h2>
+                            {% endif %}
+                            <ul class="authar-info">
+                              <li class="authar"><a href="#">por Usuario</a></li>
+                              <li class="date">{{ noticia.fecha }}</li>
+                              <li class="view"><a href="#">{{ noticia.visitas }} Visitas</a></li>
+                            </ul>
+                          </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>{% endcomment %}
+                        {# slider2 #}
+                        {% comment %} <div class="col-xs-6 col-sm-6 col-md-6 thm-padding">
+              <div class="slider-wrapper">
+                <div id="owl-slider" class="owl-carousel owl-theme">
+                  <!-- Slider item one -->
+                  {% for noticia in recientes %}
+                    <div class="item">
+                      <div class="">
+                        <a href="{%  url 'detnoticia' noticia.id %}" class="news-image"><img src="media/{{ noticia.portada }}" alt="" class="img-responsive"></a>
+                          <div class="post-text">
+                            <span class="post-category">{{ noticia.categoria.nombre }}</span>
+                            {% if noticia.titulo %}
+                            <h2><a href="#">{{ noticia.titulo }} </a></h2>
+                            {% endif %}
+                            <ul class="authar-info">
+                              <li class="authar"><a href="#">por Usuario</a></li>
+                              <li class="date">{{ noticia.fecha }}</li>
+                              <li class="view"><a href="#">{{ noticia.visitas }} Visitas</a></li>
+                            </ul>
+                          </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>{% endcomment %}
+                        {# slider3 #}
+                        {% comment %}<div class="col-xs-12 col-sm-6 col-md-6 thm-padding">
+              <div class="row slider-right-post thm-margin">
+                {% for not2 in destacadas %}
+                  {% if forloop.counter == 1 %}
+                    <div class="col-xs-6 col-sm-12 col-md-12 thm-padding hidden-xs">
+                      <div class="slider-post post-height-2">
+                        <a href="{%  url 'detnoticia' not2.id %}" class="news-image"><img src="media/{{ not2.portada }}" alt="" class="img-responsive"></a>
+                          <div class="post-text">
+                            <span class="post-category">{{ not2.categoria.nombre }}</span>
+                              {% if not2.titulo %}
+                                <h4><a href="{% url 'detnoticia' not2.id %}">{{ not2.titulo }}</a></h4>
+                              {% endif %}
+                              <!--ul class="authar-info">
+                                <li class="authar"><a href="#">por Usuario Admin</a></li>
+                                <li class="hidden-xs">{{ not2.fecha }}</li>
+                                <li class="view"><a href="#">{{ not2.visitas }} Visitas</a></li>
+                              </ul-->
+                          </div>
+                      </div>
+                    </div>
+                  {% elif forloop.counter == 2 %}
+                    <div class="col-xs-6 col-sm-6 col-md-6 thm-padding">
+                      <div class="slider-post post-height-2">
+                        <a href="{%  url 'detnoticia' not2.id %}" class="news-image"><img src="media/{{ not2.portada }}" alt="" class="img-responsive"></a>
+                          <div class="post-text">
+                            <span class="post-category">{{ not2.categoria.nombre }}</span>
+                              {% if not2.titulo %}
+                                <h4><a href="{% url 'detnoticia' not2.id %}">{{ not2.titulo }}</a></h4>
+                              {% endif %}
+                              <!--ul class="authar-info">
+                                <li class="authar"><a href="#">por Usuario Admin</a></li>
+                                <li class="hidden-xs">{{ not2.fecha }}</li>
+                                <li class="view"><a href="#">{{ not2.visitas }} Visitas</a></li>
+                              </ul-->
+                          </div>
+                      </div>
+                    </div>
+                  {% elif forloop.counter == 3 %}
+                    <div class="col-xs-6 col-sm-6 col-md-6 thm-padding">
+                      <div class="slider-post post-height-2">
+                        <a href="{%  url 'detnoticia' not2.id %}" class="news-image"><img src="media/{{ not2.portada }} alt="" class="img-responsive"></a>
+                          <div class="post-text">
+                            <span class="post-category">{{ not2.categoria.nombre }}</span>
+                              {% if not2.titulo %}
+                                <h4><a href="{% url 'detnoticia' not2.id %}">{{ not2.titulo }}</a></h4>
+                              {% endif %}
+                              <!--ul class="authar-info">
+                                <li class="authar"><a href="#">por Usuario Admin</a></li>
+                                <li class="hidden-xs">{{ not2.fecha }}</li>
+                                <li class="view"><a href="#">{{ not2.visitas }} Visitas</a></li>
+                              </ul-->
+                          </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>{% endcomment %}
+                    </div>
+                </div>
+                <!-- START YOUTUBE VIDEO -->
+                <!--div class="wow fadeInUp, container">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="youtube-wrapper">
+                        <div class="playlist-title"><h4>Videos Nuevos</h4></div>
+                          <div id="rypp-demo-1" class="RYPP r16-9" data-ids="hWGUnrIiOoI,7nXcLBXR70M">
+                            <div class="RYPP-video">
+                              <div class="RYPP-video-player"></div>
+                            </div>
+                            <div class="RYPP-playlist">
+                              <header>
+                                <h2 class="_h1 RYPP-title">Videos Relacionados</h2>
+                                <p class="RYPP-desc">Lista de Reproducción <a href="#" target="_blank">#Mis Cifras</a></p>
+                              </header>
+                              <div class="RYPP-items"></div>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div-->
+                <!-- END OF /. YOUTUBE VIDEO -->
+            </div>
+            <!-- START YOUTUBE VIDEO -->
+            <!--div class="wow fadeInUp, container">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="youtube-wrapper">
+                        <div class="playlist-title"><h4>Videos Nuevos</h4></div>
+                          <div id="rypp-demo-1" class="RYPP r16-9" data-ids="cIyVNoY3_L4,PQEX8QQ1fWg,3WWlhPmqXQI,kssD4L2NBw0,YcwrRA2BIlw,HMpmI2F2cMs,intentionally_erroneus">
+                            <div class="RYPP-video">
+                              <div class="RYPP-video-player">Will be replaced</div>
+                            </div>
+                            <div class="RYPP-playlist">
+                              <header>
+                                <h2 class="_h1 RYPP-title">Videos Relacionados</h2>
+                                <p class="RYPP-desc">Lista de Reproducción <a href="#" target="_blank">#Mis Cifras</a></p>
+                              </header>
+                              <div class="RYPP-items"></div>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div-->
+            <!-- END OF /. YOUTUBE VIDEO -->
+        </section>
+        <!--/section--><!-- #News End -->
+
+        <!--section id="news" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Noticias</h2>
+                      <div class="row">
+                         <div class="col-lg-6 news-img">
+                            <h5>PRINCIPALES</h5>
+                            <div class="news-item wow fadeInUp">
+                            <img src="/static/img/about-img.jpg" alt="">
+                            <div class="news-overlay">
+                            <div class="news-info"><h2 class="wow fadeInUp">Candidatos</h2></div>
+                            </div>
+                            </div>
+                         </div>
+                         <div class="col-lg-6 news-img">
+                            <h5>RECIENTES</h5>
+                            <div class="news-item wow fadeInUp">
+                            <img src="/static/img/about-img.jpg" alt="">
+                            <div class="news-overlay">
+                            <div class="news-info"><h2 class="wow fadeInUp">Candidatos</h2></div>
+                            </div>
+                            </div>
+                         </div>
+                         <div class="col-lg-3 news-img">
+                            <h5>RECIENTES</h5>
+                            <div class="news-item wow fadeInUp">
+                            <img src="/static/img/about-img.jpg" alt="">
+                            <div class="news-overlay">
+                            <div class="news-info"><h2 class="wow fadeInUp">Candidatos</h2></div>
+                            </div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div-->
+
+        <!--========================== Services Section ============================-->
+        <!--section id="services" class="wow fadeInUp">
+            <div class="container">
+              <div class="section-header">
+                <h2>Servicios</h2>
+              </div>
+
+              <div class="row">
+
+                <div class="col-lg-6">
+                  <div class="box wow fadeInLeft">
+                    <div class="icon"><i class="fa fa-bar-chart"></i></div>
+                    <h4 class="title"><a href="">Encuestas Digitales</a></h4>
+                    <p class="description"></p>
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="box wow fadeInRight">
+                    <div class="icon"><i class="fa fa-picture-o"></i></div>
+                    <h4 class="title"><a href="">Gráficos Estadísticos</a></h4>
+                    <p class="description"></p>
+                  </div>
+                  </div>
+
+                <div class="col-lg-6">
+                  <div class="box wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="icon"><i class="fa fa-shopping-bag"></i></div>
+                    <h4 class="title"><a href="">Estudio de Mercado</a></h4>
+                    <p class="description"></p>
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="box wow fadeInRight" data-wow-delay="0.2s">
+                    <div class="icon"><i class="fa fa-map"></i></div>
+                    <h4 class="title"><a href="">Imagen Política</a></h4>
+                    <p class="description"></p>
+                  </div>
+                </div>
+                </div>
+              </div>
+          </section>
+
+           #services -->
+
+        <!--========================== Our Portfolio Section ============================-->
+        <section id="portfolio" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <a href="#"><h2>Encuestas</h2></a>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row no-gutters">
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="portfolio-item wow fadeInUp">
+                            <a href="/encuestas/presidente" class="">
+                                <img src="/static/img/Encuestas/presidencia.jpg" alt="">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info"><h2 class="wow fadeInUp">Candidatos Presidencia</h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="portfolio-item wow fadeInUp">
+                            <a href="encuestas/alcalde" class="">
+                                <img src="/static/img/Encuestas/kike.jpg" alt="">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info"><h2 class="wow fadeInUp">Alcalde El Guabo</h2></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="portfolio-item wow fadeInUp">
+                            <a href="/encuestas/concejal" class="">
+                                <img src="/static/img/Encuestas/concejales.jpg" alt="">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info"><h2 class="wow fadeInUp">Concejales de El Guabo</h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="portfolio-item wow fadeInUp">
+                            <a href="#" class="">
+                                <img src="/static/img/portfolio/4.jpg" alt="">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info"><h2 class="wow fadeInUp">Candidatos Asamblea</h2></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section><!-- #portfolio -->
+
+        <!--========================== Call To Action Section ============================-->
+        <section id="call-to-action" class="wow fadeInUp">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 text-center text-lg-left">
+                        <h3 class="cta-title">¿Te Gusta lo que hacemos?</h3>
+                        <p class="cta-text"> Queremos consolidar un equipo de trabajo para seguir creciendo paso a paso
+                            cifra a cifra.</p>
+                    </div>
+                    <div class="col-lg-3 cta-btn-container text-center">
+                        <a class="cta-btn align-middle" href="#">Unete</a>
+                    </div>
+                </div>
+            </div>
+        </section><!-- #call-to-action -->
+
+        <!--========================== About Section ============================-->
+        {% comment %}<section id="about" class="wow fadeInUp">
+            <div class="slideshow">
+                <ul class="slider">
+                    <li>
+                        <img src="/static/img/about/1.jpg" alt="">
+                        <div class="caption">
+                            <h1 class="wow fadeInUp"><strong>Nosotros</strong></h1>
+                            <p class="wow fadeInDown">Somos un grupo de entusiastas<br>en tecnología y estadística</p>
+                            <p><a class="btn hvr-hover" href="#"></a></p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/static/img/about/2.jpg" alt="">
+                        <div class="caption">
+                            <h1 class="wow fadeInUp"><strong>Misión</strong></h1>
+                            <p class="wow fadeInDown">Hacer de la estadística un serie<br>de herramientas digitales</p>
+                            <p><a class="btn hvr-hover" href="#"></a></p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/static/img/about/3.jpg" alt="">
+                        <div class="caption">
+                            <h1 class="wow fadeInUp"><strong>Visión</strong></h1>
+                            <p class="wow fadeInDown">Ser la aplicación estadística<br>por excelencia del Ecuador</p>
+                            <p><a class="btn hvr-hover" href="#"></a></p>
+                        </div>
+                    </li>
+                </ul>
+                <ol class="pagination"></ol>
+                <div class="next">
+                    <a class="fa fa-angle-right"></a>
+                </div>
+                <div class="prev">
+                    <a class="fa fa-angle-left"></a>
+                </div>
+            </div>
+        </section><!-- #about -->{% endcomment %}
+
+        <!--========================== Our Team Section ============================-->
+        <section id="team" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Partners</h2>
+                    <p>Somos un grupo de entusiastas por la tecnología e informática, que combinamos nuestros esfuerzos
+                        para desarrollar esta aplicación. </p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="member">
+                            <div class="pic"><img src="/static/img/users/dizof.png" alt=""></div>
+                            <div class="details">
+                                <h4>Dizof</h4>
+                                <span>Desarrollo & Programación</span>
+                                <div class="social">
+                                    <a href=""><i class="fa fa-twitter"></i></a>
+                                    <a href=""><i class="fa fa-facebook"></i></a>
+                                    <a href=""><i class="fa fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="member">
+                            <div class="pic"><img src="/static/img/users/filmers.png" alt=""></div>
+                            <div class="details">
+                                <h4>Filmers</h4>
+                                <span>Contenidos Digitales</span>
+                                <div class="social">
+                                    <a href=""><i class="fa fa-twitter"></i></a>
+                                    <a href=""><i class="fa fa-facebook"></i></a>
+                                    <a href=""><i class="fa fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="member">
+                            <div class="pic"><img src="/static/img/users/nodus.png" alt=""></div>
+                            <div class="details">
+                                <h4>NodusNet </h4>
+                                <span>Servicios Web</span>
+                                <div class="social">
+                                    <a href=""><i class="fa fa-twitter"></i></a>
+                                    <a href=""><i class="fa fa-facebook"></i></a>
+                                    <a href=""><i class="fa fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="member">
+                            <div class="pic"><img src="/static/img/users/bit.png" alt=""></div>
+                            <div class="details">
+                                <h4>Bit</h4>
+                                <span>Diseño</span>
+                                <div class="social">
+                                    <a href=""><i class="fa fa-twitter"></i></a>
+                                    <a href=""><i class="fa fa-facebook"></i></a>
+                                    <a href=""><i class="fa fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- #team -->
+
+        <!--========================== Clients Section ============================-->
+        <section id="clients" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Clientes</h2>
+                    <p>Estos son algunos de nuestros clientes que confian en nuestro trabajo y servicios, y nosostros
+                        siempre seremos un aliado estratégico para ellos.</p>
+                </div>
+                <div class="owl-carousel clients-carousel">
+                    <img src="/static/img/clients/vortice.png" alt="">
+                    <img src="/static/img/clients/girek.png" alt="">
+                    <img src="/static/img/clients/dizof.png" alt="">
+                    <img src="/static/img/clients/zatuar.png" alt="">
+                    <img src="/static/img/clients/bit.png" alt="">
+                    <img src="/static/img/clients/jacbel.png" alt="">
+                </div>
+            </div>
+        </section><!-- #clients -->
+
+        <!--========================== Testimonials Section ============================-->
+        <!--section id="testimonials" class="wow fadeInUp">
+              <div class="container">
+                <div class="section-header">
+                  <h2>Testimonios</h2>
+                  <p>Estos son algunos de los comentarios que hemos recibido de parte de nuestros clientes y usuarios.</p>
+                </div>
+                <div class="owl-carousel testimonials-carousel">
+
+                    <div class="testimonial-item">
+                      <p>
+                        <img src="/static/img/quote-sign-left.png" class="quote-sign-left" alt="">
+                        Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                        <img src="/static/img/quote-sign-right.png" class="quote-sign-right" alt="">
+                      </p>
+                      <img src="/static/img/testimonial-1.jpg" class="testimonial-img" alt="">
+                      <h3>Saul Goodman</h3>
+                      <h4>Ceo &amp; Founder</h4>
+                    </div>
+
+                </div>
+              </div>
+          </section><testimonials-->
+
+        <!--========================== Contact Section ============================-->
+        <section id="contact" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>CONTACTO</h2>
+                    <p>Su opinion es importante para nosotros, queremos estar siempre en comunicación con nuestros
+                        usuarios.</p>
+                </div>
+
+                <div class="row contact-info">
+
+                    <div class="col-md-4">
+                        <div class="contact-address">
+                            <i class="ion-ios-location-outline"></i>
+                            <h3>Dirección</h3>
+                            <address>El Guabo - El Oro</address>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="contact-phone">
+                            <i class="ion-ios-telephone-outline"></i>
+                            <h3>Telefóno</h3>
+                            <p><a href="tel:+155895548855">+593 989505236</a></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="contact-email">
+                            <i class="ion-ios-email-outline"></i>
+                            <h3>Email</h3>
+                            <p><a href="mailto:info@example.com">info@miscifras.com</a></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--div class="container mb-4">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22864.11283411948!2d-73.96468908098944!3d40.630720240038435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbg!4v1540447494452" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div-->
+
+            <div class="container">
+                <div class="form">
+                    <div id="sendmessage">Your message has been sent. Thank you!</div>
+                    <div id="errormessage"></div>
+                    <form action="" method="post" role="form" class="contactForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Nombres"
+                                       data-rule="minlen:4" data-msg="Please enter at least 4 chars"/>
+                                <div class="validation"></div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email"
+                                       data-rule="email" data-msg="Please enter a valid email"/>
+                                <div class="validation"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Asunto"
+                                   data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject"/>
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" rows="5" data-rule="required"
+                                      data-msg="Please write something for us" placeholder="Mensaje"></textarea>
+                            <div class="validation"></div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </section><!-- #contact -->
+    </main>
+{% endblock %}
+
+{% block footer %}
+    <!--========================== Footer ============================-->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong>Mis Cifras</strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!--
+                  All the links in the footer should remain intact.
+                  You can delete the links only if you purchased the pro version.
+                  Licensing information: https://bootstrapmade.com/license/
+                  Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Reveal
+                -->
+                Designed by <a href="https://dizof.com/">Dizof</a>
+            </div>
+        </div>
+    </footer><!-- #footer -->
+{% endblock %}
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+{% block scripts %}
+    <!-- JavaScript Libraries -->
+    <script src="/static/lib/jquery/jquery.min.js"></script>
+    <script src="/static/lib/jquery/jquery-migrate.min.js"></script>
+    <script src="/static/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/lib/easing/easing.min.js"></script>
+    <script src="/static/lib/superfish/hoverIntent.js"></script>
+    <script src="/static/lib/superfish/superfish.min.js"></script>
+    <script src="/static/lib/wow/wow.min.js"></script>
+    <script src="/static/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/static/lib/magnific-popup/magnific-popup.min.js"></script>
+    <script src="/static/lib/sticky/sticky.js"></script>
+
+    <!-- Contact Form JavaScript File -->
+    <script src="/static/contactform/contactform.js"></script>
+
+    <!-- Template Main Javascript File -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/custom.js"></script><!-- revisar -->
+    <script src="/static/js/RYPP.js"></script>
+    <script src="/static/js/theia-sticky-sidebar.js"></script> <!-- slider revisar -->
+    <script src="/static/js/owl.carousel.min.js"></script>
+
+    <!-- Login Javascript File -->
+    <!--script src="/static/js/acciones.js"></script-->
+{% endblock %}
+
+</body>
+</html>

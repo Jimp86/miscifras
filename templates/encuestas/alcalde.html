@@ -1,0 +1,227 @@
+{% extends "home/home.html" %}
+
+
+
+{% block contenido %}
+  <!--========================== Survey Section ============================-->
+
+    <section id="survey" class="wow fadeInUp">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="wow fadeInUp">ENCUESTAS</h2>
+        </div>
+          <br>
+        <div class="container">
+          <div class="row">
+
+              <div class="col-lg-6 survey-present">
+                  <div class="survey-item wow fadeInUp">
+                    <img src="/static/img/Encuestas/kike.jpg" alt="">
+                      <div class="survey-overlay">
+                        <div class="survey-info"><h2 class="wow fadeInUp">¿Qué es Mis Cifras?</h2></div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-lg-6 content">
+                  <br>
+                <h2>Objetivo:</h2>
+                  <br>
+                <h4>Esta encuesta tiene como propósito consultar a los habitantes del cantón El Guabo sobre la posición que tienen ante la gestión municipal del lic. Hitler Álvarez, alcalde del cantón El Guabo.</h4>
+                  <br>
+                <h3>Para empezar la encuesta lea las instrucciones y siga cada una de ellas.</h3>
+
+              </div>
+
+              <div class="col-lg-8 content">
+                  <br>
+                <h2>Instrucciones:</h2>
+                  <br>
+                <h4 class="wow fadeInUp">Para empezar esta encuestas tome en cuenta lo siguiente:</h4>
+                  <br>
+                <div class="content">
+                  <ul>
+                    <li><i class="ion-android-checkmark-circle"></i> Digite su número de cédula</li>
+                    <li><i class="ion-android-checkmark-circle"></i> Elija la opción de su preferencia</li>
+                    <li><i class="ion-android-checkmark-circle"></i> Haga click en el boton votar</li>
+                  </ul>
+                </div>
+                <div>
+                    <input type="text" maxlength="10" placeholder="Ingrese su n° de cédula" class="form-control" id="cedula">
+                    <br>
+                    <input type="text" maxlength="30" placeholder="Ingrese sus Nombres" class="form-control" id="nombres">
+                    <br>
+                    <input type="text" maxlength="30" placeholder="Ingrese sus Apellidos" class="form-control" id="apellidos">
+                    <br>
+                    <input type="text" maxlength="30" placeholder="Lugar" class="form-control" id="apellidos">
+                    <br>
+                    <input type="text" maxlength="30" placeholder="Estado & votado / no votado" class="form-control" id="apellidos">
+                    <br>
+                    <input type="hidden" id="ipId" name="ip">
+                </div>
+
+                <div class="wow fadeInUp, content">
+                    <br>
+                      <h2 class="text-center">¿Cúal es su posición ante la Gestión Municipal del Alcalde Hitler Álvarez?</h2>
+                    <br>
+                  <div class="card-group">
+                    {% for participante in participantes %}
+                        <div class="card" style="text-align: center; padding: 5px">
+                            <img src="/media/{{ participante.foto }}" style="width: 100px; margin: auto" class="img-responsive img-thumbnail"
+                                 alt="...">
+                            <div style="height: 40px">
+                                {{ participante.nombre|upper }}
+                            </div>
+                            <div class="card-body">
+                                <div class="row" style="text-align: center">
+                                    <a class="btn btn-danger datos" href="/encuestas/alcalde/{{ participante.id }}/"
+                                       style="width: 120%; color: white">Votar</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                {% load contadores %}
+                  <br>
+                  <br>
+                  <div class="wow fadeInUp, container">
+                    <div class="section-header">
+                      <div class="card text-center">
+                        <div class="card-header">
+                          RESULTADOS PARCIALES DE LA ENCUESTA
+                        </div>
+                        <div class="card-body">
+                          <p class="card-text">
+                            <canvas id="myChart" width="400" height="180" style="font-size: 10px"></canvas>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                      <h6 class="wow fadeInUp">Esta encuesta estará activa durante el mes de agosto y septiembre del 2020.</h6>
+                  </div>
+
+              </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--section id="present" class="wow fadeInUp">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-6 news-present">
+              <div class="present-item wow fadeInUp">
+                <img src="/static/img/Encuestas/kike.jpg" alt="">
+                  <div class="present-overlay">
+                    <div class="present-info"><h2 class="wow fadeInUp">¿Qué es Mis Cifras?</h2></div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-lg-6 content">
+            <h2>Objetivo:</h2>
+              <br>
+            <h4>Esta encuesta tiene como propósito consultar a los habitantes del cantón El Guabo sobre la posición que tienen ante la gestión municipal del lic. Hitler Álvarez, alcalde del cantón El Guabo.</h4>
+              <br>
+            <h3>Para empezar la encuesta lea las instrucciones y siga cada una de ellas.</h3>
+
+          </div>
+
+        </div>
+
+      </div>
+    </--section><!-- #about -->
+
+
+
+  <!--========================== Scripts Section ============================-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      cedula=$('#cedula').val()
+        setTimeout(function(){
+        window.location='/encuestas/alcalde/'
+        $('#cedula').val(cedula)
+        },2000000000000000);
+
+        $(".datos").click(function () {
+        if ($('#cedula').val().length ==10){
+            valor = $(this).attr('href') + $('#cedula').val() + "/"
+            $(".datos").attr('href', valor)
+        }
+        else{
+            $(".datos").attr('href', '/encuestas/alcalde/')
+        }
+
+        });
+  </script>
+    <script>
+    var labels = []
+    var datos = []
+    {% for i in participantes %}
+        if ('{% encuestaA i.id %}' != 'None') {
+            labels.push("{{ i.nombre }}"+': '+'{% encuestaA i.id %}')
+            datos.push({% encuestaA i.id %})
+        } else {
+            labels.push("{{ i.nombre }}"+": 0")
+            datos.push(0);
+        }
+    {% endfor %}
+    console.log(labels)
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '{% cuenta_total_alcalde %} Votos',
+                data: datos,
+                backgroundColor: [
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+{% endblock %}

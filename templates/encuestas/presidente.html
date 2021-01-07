@@ -1,0 +1,158 @@
+{% extends "home/hom.html" %}
+
+{% block intro %}{% endblock %}
+
+{% block contenido %}
+  <!--========================== Survey Section ============================-->
+    <section id="survey" class="wow fadeInUp">
+      <div class="container">
+       <div class="section-header">
+        <h2 class="wow fadeInUp">ENCUESTAS</h2>
+        <h3 class="wow fadeInUp">Precandidatos a la Presidencia 2021</h3>
+        <h5 class="wow fadeInUp">Esta encuesta tiene como propósito medir la intención de voto de los ecuatorianos, hacia los precandidatos electorales que han confirmado su intención de buscar la presidencia del Ecuador en febrero del 2021.</h5>
+        <h4 class="wow fadeInUp">Para empezar esta encuestas tome en cuenta lo siguiente:</h4>
+            <div class="content">
+             <ul>
+              <li><i class="ion-android-checkmark-circle"></i> Digite su número de cédula</li>
+              <li><i class="ion-android-checkmark-circle"></i> Elija la opción de su preferencia</li>
+              <li><i class="ion-android-checkmark-circle"></i> Haga click en el boton votar</li>
+            </ul>
+            </div>
+            <!--input type="hidden" id="ipId" name="ip"-->
+            <input type="text" maxlength="10" placeholder="Ingrese su n° de cédula para iniciar la encuesta" class="form-control" id="cedula">
+       </div>
+      </div>
+
+      <div class="wow fadeInUp, container">
+        <div class="section-header">
+            <h5 class="text-center">¿Si hoy fueran las elecciones para Presidente, por cual de los siguientes candidatos ud. votaria?</h5>
+        </div>
+        <div class="row">
+        {% for participante in participantes %}
+            <div class="col-lg-2" style="text-align: center; padding: 5px">
+                <img src="/media/{{ participante.foto }}" style="width: 100px; margin: auto" class="img-responsive img-thumbnail"
+                     alt="...">
+                <div style="height: 20px; font-size: 12px">
+                    {{ participante.nombre|upper }}
+                </div>
+                <div class="card-body">
+                    <div class="row" style="text-align: center">
+                        <a class="btn btn-danger datos" href="/encuestas/presidente/{{ participante.id }}/"
+                           style="width: 100%; color: white; padding: 0; margin: 0; font-size: 12px">VOTAR</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+      </div>
+
+      {% load contadores %}
+        <p></p>
+      <div class="wow fadeInUp, container">
+        <div class="section-header">
+        <div class="card text-center">
+        <div class="card-header">
+         RESULTADOS PARCIALES DE LA ENCUESTA
+        </div>
+        <div class="card-body">
+         <p class="card-text">
+          <canvas id="myChart" width="400" height="320" style="font-size: 10px"></canvas>
+         </p>
+        </div>
+        </div>
+        </div>
+        <h6 class="wow fadeInUp">Esta encuesta estará activa durante el mes de agosto y septiembre del 2020.</h6>
+      </div>
+    </section>
+
+<!--========================== Scripts Section ============================-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+      cedula=$('#cedula').val()
+    setTimeout(function(){
+        window.location='/encuestas/presidente/'
+        $('#cedula').val(cedula)
+    },20000000);
+
+    $(".datos").click(function () {
+        if ($('#cedula').val().length ==10){
+            valor = $(this).attr('href') + $('#cedula').val() + "/"
+            $(".datos").attr('href', valor)
+        }
+        else{
+            $(".datos").attr('href', '/encuestas/presidente/')
+        }
+
+    });
+    </script>
+
+    <script>
+    var labels = []
+    var datos = []
+    {% for i in participantes %}
+        if ('{% encuestaP i.id %}' != 'None') {
+            labels.push("{{ i.nombre }}"+': '+'{% encuestaP i.id %}')
+            datos.push({% encuestaP i.id %})
+        } else {
+            labels.push("{{ i.nombre }}"+": 0")
+            datos.push(0);
+        }
+    {% endfor %}
+    console.log(labels)
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '{% cuenta_total_presidente %} Votos',
+                data: datos,
+                backgroundColor: [
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+{% endblock %}
+
+
+
+

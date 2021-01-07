@@ -1,0 +1,38 @@
+{% extends 'seleccionar.html' %}
+{% block dignidades %}
+    <div class="card text-center">
+        <div class="card-header">
+            COMISIOS ELECTORALES 2019
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">CONCEJALES RURAL</h5>
+            <p class="card-text">
+            <form action="" id="myFormulario" method="post">
+                <div class="card-group">
+                    {% for partido in partidos %}
+                        <div class="card">
+                            <img src="/media/{{ partido.logo }}" style="width: 120px; margin: 0 auto" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                {% for participante in participantes %}
+                                    {% if participante.partido == partido %}
+                                        <div class="row">
+                                            <strong>{{ participante.nombre }}</strong> <input type="number" class="form-control" value="0" name="{{ participante.id }}">
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% csrf_token %}
+                <hr>
+                <button class="btn btn-primary">Registrar</button>
+                <a href="/" class="btn btn-danger">Volver</a>
+            </form>
+            </p>
+        </div>
+        <div class="card-footer text-muted">
+            Recuerde que los datos una vez regitrados no se podran modificar.
+        </div>
+    </div>
+{% endblock %}

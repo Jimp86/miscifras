@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Mis Cifras</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="/static/img/favicon.png" rel="icon">
+  <link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
+  <!-- Bootstrap CSS File -->
+  <link href="/static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Libraries CSS Files -->
+  <link href="/static/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/static/lib/animate/animate.min.css" rel="stylesheet">
+  <link href="/static/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="/static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="/static/lib/magnific-popup/magnific-popup.css" rel="stylesheet">
+  <link href="/static/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <!-- Main Stylesheet File -->
+  <link href="/static/css/style.css" rel="stylesheet">
+
+
+  <!-- =======================================================
+    Theme Name: Reveal
+    Theme URL: https://bootstrapmade.com/reveal-bootstrap-corporate-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+</head>
+
+<body>
+
+	<div class="leftHalf" style="background-image: url('/static/img/login/registro.jpg')">
+        <div class="login-promo-txt">
+            <h2>Registrate Gratis</h2>
+            <p>Desde aqui podras ingresar a tu panel de administación</p>
+        </div>
+    </div>
+
+    <div class="rightHalf">
+        <div class="position-relative">
+            <!--login form-->
+            <div class="login-form registration text-center">
+                <h2 class="text-center mb-4">
+                    <!--img src="/static/img/ec-02.png" srcset="/static/img/ec-02.png" style="width: 100%" alt="CodeLab"-->
+                </h2>
+                <h4 class=" text-success mb-2">Formulario de Registro</h4>
+                <p class="mb-5">Ingresa los datos a continuación: </p>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" required id="exampleInputEmail1" placeholder="Ingrese su email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="pass1" required id="exampleInputPassword1" placeholder="Ingrese Password">
+                    </div>
+                    <!--div class="form-group">
+                        <input type="password" class="form-control" name="pass2" required id="exampleInputPassword2" placeholder="Confirme su Password">
+                    </div-->
+                    <div>
+                        <button type="submit" class="btn btn-info btn-pill float-right, text-center">Registrase</button>
+                    </div>
+                    <div class="form-divider"></div>
+                    <!--a href="" class="btn btn-facebook btn-pill text-uppercase"><i class="fa fa-facebook-square"></i> Registrarse con</a-->
+                    <div class="text-center mt-4 f12">
+                        Ya estas registrado? <a href="accounts/login/" class="btn-link text-capitalize text-danger">Inicia Sesión</a>
+                    </div>
+                </form>
+            </div>
+            <!--/login form-->
+        </div>
+    </div>
+
+    <!--Scripts-->
+
+</body>
+</html>

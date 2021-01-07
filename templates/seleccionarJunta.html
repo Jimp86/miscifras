@@ -1,0 +1,98 @@
+{% extends 'seleccionar.html' %}
+{% block contenido %}
+    <div class="card text-center">
+        <div class="card-header">
+            SELECCIONE SU JUNTA RECEPTORA DEL VOTO
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">JRV</h5>
+            <p class="card-text">
+            <div class="row">
+                <div class="col-lg-12">
+                    <select name="recinto" id="recinto" class="form-control">
+                        {% for recinto in recintos %}
+                            <option value="{{ recinto.id }}">
+                                {{ recinto.nombre }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-12">
+                    <select name="genero" id="genero" class="form-control">
+                        <option value="MASCULINO">MASCULINO</option>
+                        <option value="FEMENINO">FEMENINO</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-12" id="numeer">
+                    <select class="form-control" name="numero" id="numero"></select>
+
+                </div>
+            </div>
+            </p>
+            <a href="" id="entrar" class="btn btn-primary">Entrar</a>
+        </div>
+        <div class="card-footer text-muted">
+            Recuerde que los datos una vez regitrados no se podran modificar
+        </div>
+    </div>
+    <br>
+   {% if user.is_superuser %}
+    <div class="card text-center">
+        <div class="card-header">
+            RESULTADOS ELECTORALES
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+            <div class="row">
+                <a class="btn btn-success btn-lg btn-block" href="/rjunta/0/">Ver Presidente por JRV</a></li>
+                <a class="btn btn-danger btn-lg btn-block" href="/rRecinto/0/">Ver Presidente por Recinto</a>
+                <a class="btn btn-info btn-lg btn-block" href="/rtodoAlcaldes/">Resultados Presidente</a>
+                <!--a class="btn btn-success btn-lg btn-block" href="/rjuntaPre/0/">Ver Prefecto por JRV</a>
+                <a class="btn btn-danger btn-lg btn-block" href="/rRecintoPre/0/">Ver Prefecto por Recinto</a>
+                <a class="btn btn-info btn-lg btn-block" href="/rtodoPrefecto/">Resultados Prefecto</a>
+                <a class="btn btn-warning btn-lg btn-block" href="/rconcejales/U/">Res. general Concejales Urbanos</a>
+                <a class="btn btn-warning btn-lg btn-block" href="/tconcejales/U/">Res. Tabulados D'HONTD Urbanos</a>
+                <a class="btn btn-primary btn-lg btn-block" href="/rconcejales/R/">Res. general Concejales Rurales</a>
+                <a class="btn btn-primary btn-lg btn-block" href="/tconcejales/R/">Res. Tabulados D'HONTD Rurales</a-->
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            Seleccione los datos segun se muestran en la pagina
+        </div>
+    </div>
+    {% endif %}
+    <br>
+    <script>
+        $("#genero").change(function () {
+            recinto = $("#recinto").val()
+            genero = $("#genero").val()
+            console.log("selecciono: " + recinto + "  - " + genero)
+            $.get('/njunta/' + recinto + '/' + genero + '/', function (data) {
+                console.log(data)
+                $('#numero').html(data)
+                $("#entrar").attr('href', "/candidatos/" + $("#numero").val() + "/")
+            });
+        }).change();
+
+        $("#recinto").change(function () {
+            recinto = $("#recinto").val()
+            genero = $("#genero").val()
+            console.log("selecciono: " + recinto + "  - " + genero)
+            $.get('/njunta/' + recinto + '/' + genero + '/', function (data) {
+                console.log(data)
+                $('#numero').html(data)
+                $("#entrar").attr('href', "/candidatos/" + $("#numero").val() + "/")
+            });
+        }).change();
+
+        $("#numero").change(function () {
+            $("#entrar").attr('href', "/candidatos/" + $("#numero").val() + "/")
+        }).change();
+    </script>
+{% endblock %}

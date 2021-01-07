@@ -1,0 +1,37 @@
+{% extends 'seleccionar.html' %}
+{% block dignidades %}
+    <div class="card text-center">
+        <div class="card-header">
+            COMISIOS ELECTORALES 2019
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">PREFECTOS</h5>
+            <p class="card-text">
+            <form action="" id="myFormulario" method="post"> {% csrf_token %}
+                {% for participante in participantes %}
+                    <div class="row" style="padding-top: 10px">
+                        <div class="col-lg-4" style="text-align: right">{{ participante.nombre }}</div>
+                        <div class="col-lg-7">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"
+                                          id="basic-addon{{ participante.id }}">{{ participante.partido.lista }}</span>
+                                </div>
+                                <input type="number" value="0" name="{{ participante.id }}" class="form-control"
+                                       aria-describedby="basic-addon{{ participante.id }}">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            <hr>
+                <button class="btn btn-primary">Registrar</button>
+                <a href="/" class="btn btn-danger">Volver</a>
+            </form>
+            </p>
+
+        </div>
+        <div class="card-footer text-muted">
+            Recuerde que los datos una vez regitrados no se podran modificar
+        </div>
+    </div>
+{% endblock %}

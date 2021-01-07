@@ -1,0 +1,227 @@
+{% extends "home/home.html" %}
+{%  block intro %}{% endblock %}
+
+{% block contenido %}
+  <main id="main">
+    <section id="present" class="wow fadeInUp">
+        <div class="container">
+           <div class="section-header">
+               <a href="#"><h2>Perfil de Usuario</h2></a>
+               <p>Bievenido: {{ user.username }}</p>
+           </div>
+        </div>
+        <div class="container">
+          <div class="row">
+                  {# imagen #}
+                  <div class="col-lg-6 present-img">
+                    <div class="present-item wow fadeInUp">
+                      <img src="/static/img/about-img.jpg" alt="">
+                      <div class="present-overlay">
+                        <div class="present-info"><h2 class="wow fadeInUp">¿Qué es Mis Cifras?</h2></div>
+                      </div>
+                    </div>
+                  </div>
+                  {# text #}
+                  <div class="col-lg-6 content">
+                      <br>
+                    <nav aria-label="breadcrumb" class="d-inline-block ">
+                        <ol class="breadcrumb p-0">
+                            <li class="breadcrumb-item"><a href="#">Datos Básicos</a></li>
+                            <li class="breadcrumb-item"><a href="#">Registro/Modificación</a></li>
+                        </ol>
+                    </nav>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Username</span>
+                      </div>
+                      <input type="text" class="form-control" readonly value="{{ request.user.username }}" aria-describedby="basic-addon1" name="username">
+                    </div>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Nombre</span>
+                      </div>
+                      <input type="text" required class="form-control" value="{{ perfil.nombres }}" aria-describedby="basic-addon1" name="nombres">
+                    </div>
+                    <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Apellidos</span>
+                                    </div>
+                                    <input type="text" required class="form-control" value="{{ perfil.apellidos }}"
+                                           aria-describedby="basic-addon1" name="apellidos">
+                                </div>
+                    <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Cedula de Id:</span>
+                                    </div>
+                                    <input type="text" required class="form-control" value="{{ perfil.cedula }}"
+                                           aria-describedby="basic-addon1" name="cedula">
+                                </div>
+                    <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Teléfono</span>
+                                    </div>
+                                    <input type="text" required class="form-control" placeholder="Escriba un teléfono"
+                                           value="{{ perfil.telefono }}"
+                                           aria-describedby="basic-addon1" name="telefono">
+                                </div>
+                    <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Email</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Escriba un email" readonly=""
+                                           value="{{ request.user.email }}"
+                                           aria-describedby="basic-addon1" name="email">
+                                </div>
+
+
+                    <!--h2>Participa con Nosotros</h2>
+                    <h4>Somos la iniciativa privada que desarrollará la primera plataforma digital de estadísticas del Ecuador.</h4>
+                    <ul>
+                      <h5><i class="ion-android-checkmark-circle"></i>  Totalmente en Línea</h5>
+                      <h5><i class="ion-android-checkmark-circle"></i>  Desarrollo Movil Web Responsivo</h5>
+                      <h5><i class="ion-android-checkmark-circle"></i>  Fácil e Intuitivo</h5>
+                    </ul-->
+                  </div>
+                  <div class="col-lg-6 content">
+                      <br>
+                    <nav aria-label="breadcrumb" class="d-inline-block ">
+                        <ol class="breadcrumb p-0">
+                            <li class="breadcrumb-item"><a href="#">Dirección</a></li>
+                            <li class="breadcrumb-item"><a href="#">Domicilio</a></li>
+                        </ol>
+                    </nav>
+                    <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Dirección</span>
+                                    </div>
+                                    <input type="text" class="form-control" required placeholder="Escriba la dirección"
+                                           value="{{ perfil.direccion }}"
+                                           aria-describedby="basic-addon1" name="direccion">
+                                </div>
+                                <div class="input-group mb-3" id="pais">
+                                    <select class="form-control" id="select_pais" name="pais_id">
+                                        <option></option>
+                                        {% for pais in paises %}
+                                            {% if perfil.ciudad.provincia.pais_id == pais.id %}
+                                                <option selected value="{{ pais.id }}">{{ pais.nombre }}</option>
+                                            {% else %}
+                                                <option value="{{ pais.id }}">{{ pais.nombre }}</option>
+                                            {% endif %}
+
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <label for=""><i>Actualmente:</i> {{ perfil.ciudad.provincia.nombre }}</label>
+                                </div>
+                                <div class="input-group mb-3" id="provincia">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <label for=""><i>Actualmente:</i> {{ perfil.ciudad.nombre }}</label>
+                                </div>
+                                <div class="input-group mb-3" id="ciudad">
+
+                                </div>
+                                 <div class="input-group mb-3">
+                                    <button class="btn btn-primary">Enviar Datos</button>
+                                </div>
+
+
+                    <!--h2>Participa con Nosotros</h2>
+                    <h4>Somos la iniciativa privada que desarrollará la primera plataforma digital de estadísticas del Ecuador.</h4>
+                    <ul>
+                      <h5><i class="ion-android-checkmark-circle"></i>  Totalmente en Línea</h5>
+                      <h5><i class="ion-android-checkmark-circle"></i>  Desarrollo Movil Web Responsivo</h5>
+                      <h5><i class="ion-android-checkmark-circle"></i>  Fácil e Intuitivo</h5>
+                    </ul-->
+                  </div>
+                  <div class="col-lg-6 content">
+                      <br>
+                    <nav aria-label="breadcrumb" class="d-inline-block ">
+                        <ol class="breadcrumb p-0">
+                            <li class="breadcrumb-item"><a href="#">Cambiar</a></li>
+                            <li class="breadcrumb-item"><a href="#">Datos de Acceso</a></li>
+                        </ol>
+                    </nav>
+                    <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Nombre Usuario</span>
+                                    </div>
+                                    <input type="text" class="form-control" required readonly value="{{ request.user.email }}" aria-describedby="basic-addon1" name="username">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Actual Password</span>
+                                    </div>
+                                    <input type="password" class="form-control" aria-describedby="basic-addon1" required
+                                           name="password">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"  id="basic-addon1">Nuevo Password</span>
+                                    </div>
+                                    <input type="password" required class="form-control" aria-describedby="basic-addon1" name="password1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Repita Password</span>
+                                    </div>
+                                    <input type="password" required class="form-control" aria-describedby="basic-addon1" name="password2">
+                                </div>
+                      <br>
+                                <div class="container">
+                                    <div class="row">
+                                        <button class="btn btn-danger">Enviar Datos</button>
+                                    </div>
+                                </div>
+
+
+                    <!--h2>Participa con Nosotros</h2>
+                    <h4>Somos la iniciativa privada que desarrollará la primera plataforma digital de estadísticas del Ecuador.</h4>
+                    <ul>
+                      <h5><i class="ion-android-checkmark-circle"></i>  Totalmente en Línea</h5>
+                      <h5><i class="ion-android-checkmark-circle"></i>  Desarrollo Movil Web Responsivo</h5>
+                      <h5><i class="ion-android-checkmark-circle"></i>  Fácil e Intuitivo</h5>
+                    </ul-->
+                  </div>
+                </div>
+        </div>
+    </section>
+  </main>
+{% endblock %}
+
+
+
+{% block script %}
+    <script src="/static/oTransporte/assets/vendor/select2/js/select2.min.js"></script>
+    <!--init select2-->
+    <script src="/static/oTransporte/assets/vendor/js-init/init-select2.js"></script>
+    <script src="/static/oTransporte/assets/vendor/data-tables/jquery.dataTables.min.js"></script>
+    <script src="/static/oTransporte/assets/vendor/data-tables/dataTables.bootstrap4.min.js"></script>
+    <script src="/static/sweetalert.min.js"></script>
+    <script>
+        $("#select_pais").change(function () {
+            if ($(this).val()) {
+                $.get("/snippers/provincias/" + $(this).val() + "/", function (data) {
+                    $("#provincia").html(data)
+
+
+                });
+
+            }
+
+        }).change()
+        $("#select_provincia option[value=" + {{perfil.ciudad.provincia_id }} +"]").attr("selected", true);
+        $("#select_ciudad option[value=" + {{perfil.ciudad_id }} +"]").attr("selected", true);
+
+        {% if mensaje %}
+            swal("En buena hora!", '{{mensaje}}', "success");
+        {% endif %}
+        {% if error %}
+            swal("Cuanto los sentimos!", '{{error}}', "error");
+        {% endif %}
+    </script>
+{% endblock %}
+
+

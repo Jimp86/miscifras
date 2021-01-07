@@ -1,0 +1,154 @@
+{% extends 'seleccionar.html' %}
+{% block contenido %}
+    {% load contadores %}
+    <div class="card text-center">
+        <div class="card-header">
+            RESUMEN CONCEJALES
+        </div>
+        <div class="card-group">
+            {% for partido in partidos %}
+                <div class="card">
+                    <img src="/media/{{ partido.logo }}" style="width: 120px; margin: 0 auto" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        {% for participante in participantes %}
+                            {% if participante.partido == partido %}
+                                <div class="row">
+                                    <strong>{{ participante.nombre }} </strong> <label class="form-control"
+                                                                                       id="con{{ participante.id }}">{% cuenta_por_candidatos participante.id %}</label>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <BR><BR>
+    <div class="card text-center">
+        <div class="card-header">
+            ASIGNACION DE ESCAÑOS SEGUN METODO D'HONDT
+        </div>
+        <div class="card-group table-responsive">
+            <table class="table table-bordered table-striped">
+                {% if n == "U" %}
+                    <thead>
+                    <th># LISTA</th>
+                    <th>PARTIDO</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    </thead>
+                    <tbody>
+                    {% for partido in partidos %}
+                        <tr>
+                            <td>{{ partido.lista }}</td>
+                            <td>{{ partido.nombre }}</td>
+                            <td class="{% cuenta_escanios partido.id 1 %}"> {% cuenta_escanios partido.id 1 %}</td>
+                            <td class="{% cuenta_escanios partido.id 2 %}">{% cuenta_escanios partido.id 2 %}</td>
+                            <td class="{% cuenta_escanios partido.id 3 %}">{% cuenta_escanios partido.id 3 %}</td>
+                            <td class="{% cuenta_escanios partido.id 4 %}">{% cuenta_escanios partido.id 4 %}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                {% else %}
+                    <thead>
+                    <th># LISTA</th>
+                    <th>PARTIDO</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    </thead>
+                    <tbody>
+                    {% for partido in partidos %}
+                        <tr>
+                            <td>{{ partido.lista }}</td>
+                            <td>{{ partido.nombre }}</td>
+                            <td class="{% cuenta_escaniosRural partido.id 1 %}"> {% cuenta_escaniosRural partido.id 1 %}</td>
+                            <td class="{% cuenta_escaniosRural partido.id 2 %}">{% cuenta_escaniosRural partido.id 2 %}</td>
+                            <td class="{% cuenta_escaniosRural partido.id 3 %}">{% cuenta_escaniosRural partido.id 3 %}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                {% endif %}
+
+            </table>
+        </div>
+        <div class="card-footer text-muted">
+            <a href="/" class="btn btn-danger">Volver</a>
+        </div>
+    </div>
+    <br><br>
+
+    <script>
+        labels = []
+        datos = []
+        {% if n == "U" %}
+            $('.table tr').each(function () {
+                var n1 = $(this).find("td").eq(2).html();
+                var n2 = $(this).find("td").eq(3).html();
+                var n3 = $(this).find("td").eq(4).html();
+                var n4 = $(this).find("td").eq(5).html();
+                if (n1 && n2 && n3 && n4) {
+                    datos.push(parseInt(n1), parseInt(n2), parseInt(n3), parseInt(n4))
+                }
+            });
+            datos=burbuja(datos);
+            labels=datos.splice(20, 24)
+        {% else %}
+            $('.table tr').each(function () {
+                var n1 = $(this).find("td").eq(2).html();
+                var n2 = $(this).find("td").eq(3).html();
+                var n3 = $(this).find("td").eq(4).html();
+                if (n1 && n2 && n3) {
+                    datos.push(parseInt(n1), parseInt(n2), parseInt(n3))
+                }
+            });
+            datos=burbuja(datos);
+            labels=datos.splice(16, 18)
+        {% endif %}
+
+
+
+        console.log(datos)
+
+        console.log(labels)
+
+        for(var i=0; i<=labels.length;i++){
+            $('.table tr td').each(function () {
+                if(parseInt($(this).text()) == labels[i]){
+                    console.log(labels[i])
+                    var col = $(this).parent().children().index($(this));
+                    var row = $(this).parent().parent().children().index($(this).parent());
+                    console.log(col+", "+row)
+                    $('.'+labels[i]).css('background-color','#ffe16b');
+                    $('.'+labels[i]).css('border-color','#64baff');
+                    $('.'+labels[i]).css('font-weight','bold');
+
+
+                }
+            });
+        }
+
+        function burbuja(arreglo) {
+            //recorreremos todos los elementos hasta n-1
+            for (i = 0; i < (arreglo.length - 1); i++)
+                //recorreremos todos los elementos hasta n-i, tomar en cuenta los ultimos no tiene caso ya que ya estan acomodados.
+                for (j = 0; j < (arreglo.length - i); j++) {
+                    //comparamos
+                    if (arreglo[j] > arreglo[j + 1]) {
+                        //guardamos el numero mayor en el auxiliar
+                        aux = arreglo[j];
+                        //guardamos el numero menor en el lugar correspondiente
+                        arreglo[j] = arreglo[j + 1];
+                        //asignamos el auxiliar en el lugar correspondiente
+                        arreglo[j + 1] = aux;
+
+                    }
+
+                }
+
+            return arreglo
+        }
+    </script>
+{% endblock %}

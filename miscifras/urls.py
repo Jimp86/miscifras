@@ -69,6 +69,6 @@ urlpatterns = [
     path('encuestas/concejal/',obtenerVotosConcejal),
     path('encuestas/concejal/<int:n>/<slug:cedula>/',obtenerVotosConcejal),
     path('regip/',registrarIP),
- ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+ ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = "Administración Mis Cifras"

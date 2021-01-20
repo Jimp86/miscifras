@@ -43,10 +43,5 @@ class Noticias(models.Model):
     metadatos = models.TextField(null=True, blank=True)
     detalle = RichTextField(null=True, blank=True)
 
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        #if self.titulo:
-            #self.titulo = str.lower(self.titulo)
-        super(Noticias, self).save()
-
     def detalles(self):
         return mark_safe(self.detalle)

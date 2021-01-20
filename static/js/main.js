@@ -30,61 +30,101 @@ jQuery(document).ready(function ($) {
     items: 1
   });
 
-  // Slider About
+  // Slider Noticias
+  var img_noticias = $('.slider-noticias').length;
+  console.log(img_noticias);
 
-  var imgItems = $('.slider li').length;
-  var imgPos = 1;
-
-  for(i = 1; i <=imgItems; i++){
+  for(i = 1; i <=img_noticias; i++){
       $('.pagination').append('<li><span class="fa fa-circle"></span></li>');
   }
 
-  $('.slider li').hide();
-  $('.slider li:first').show();
-  $('.pagination li:first').css({'color': '#ffff'});
+  $('.pagination').append('<li><span class="fa fa-circle"></span></li>');
 
-  $('.pagination li').click(pagination);
-  $('.prev a').click(prevSlider);
-  $('.next a').click(nextSlider);
 
-  setInterval(function (){
-      nextSlider();
-  },9000);
+  $('.slider-noticias').hide();
+  $('.slider-noticias:first').show();
+  $('.pagination li:first').css({'color':'#50d8af'});
 
-  function pagination(){
-      var paginationPos = $(this).index() + 1;
-      $('.slider li').hide();
-      $('.slider li:nth-child('+ paginationPos +')').fadeIn();
-      $('.pagination li').css({'color':'#858585'})
-      $(this).css({'color':'#ffff'});
-  }
+  $('.more-post').hide();
+  $('.more-post:first').show();
+  $('.news-list-item:first').hide();
 
-  function pagination(){
-      var paginationPos = $(this).index() + 1;
-      $('.slider li').hide();
-      $('.slider li:nth-child('+ paginationPos +')').fadeIn();
-      $('.pagination li').css({'color':'#858585'});
-      $(this).css({'color':'#ffff'});
-      imgPos = paginationPos;
-  }
+  //
+  //$('.pagination li').click(pagination);
+  //$('.left span').click(prevSlider);
+  //$('.right span').click(nextSlider);
 
-  function prevSlider(){
-      if(imgPos <= 1){imgPos = imgItems;}
-      else{imgPos--;}
-      $('.pagination li').css({'color':'#858585'});
-      $('.pagination li:nth-child('+ imgPos +')').css({'color':'#ffff'});
-      $('.slider li').hide();
-      $('.slider li:nth-child('+ imgPos +')').fadeIn();
-  }
+  //
+  //function pagination(){
+      //var = pagpos = $(this).index() + 1;//*--posicion paginacion--*/
 
-  function nextSlider(){
-      if(imgPos >= imgItems){imgPos = 1;}
-      else{imgPos++;}
-      $('.pagination li').css({'color':'#858585'});
-      $('.pagination li:nth-child('+ imgPos +')').css({'color':'#ffff'});
-      $('.slider li').hide();
-      $('.slider li:nth-child('+ imgPos +')').fadeIn();
-  }
+      //$('.slider-noticias').hide();
+      //$('.slider-noticias:nth-child(' + pagpos +')').fadeIn();
+  //}
+
+  //function left(){
+      //if(imgPos <= 1){imgPos = imgItems;}
+      //else{imgPos--;}
+      //$('.pagination li').css({'color':'#858585'});
+      //$('.pagination li:nth-child('+ imgPos +')').css({'color':'#ffff'});
+      //$('.slider li').hide();
+      //$('.slider li:nth-child('+ imgPos +')').fadeIn();
+
+  // Slider About
+
+  //var imgItems = $('.slider li').length;
+  //var imgPos = 1;
+
+  //for(i = 1; i <=imgItems; i++){
+      //$('.pagination').append('<li><span class="fa fa-circle"></span></li>');
+  //}
+
+  //$('.slider li').hide();
+  //$('.slider li:first').show();
+  //$('.pagination li:first').css({'color': '#ffff'});
+
+  //$('.pagination li').click(pagination);
+  //$('.prev a').click(prevSlider);
+  //$('.next a').click(nextSlider);
+
+  //setInterval(function (){
+      //nextSlider();
+  //},9000);
+
+  //function pagination(){
+      //var paginationPos = $(this).index() + 1;
+      //$('.slider li').hide();
+      //$('.slider li:nth-child('+ paginationPos +')').fadeIn();
+      //$('.pagination li').css({'color':'#858585'})
+      //$(this).css({'color':'#ffff'});
+  //}
+
+  //function pagination(){
+      //var paginationPos = $(this).index() + 1;
+      //$('.slider li').hide();
+      //$('.slider li:nth-child('+ paginationPos +')').fadeIn();
+      //$('.pagination li').css({'color':'#858585'});
+      //$(this).css({'color':'#ffff'});
+      //imgPos = paginationPos;
+  //}
+
+  //function prevSlider(){
+      //if(imgPos <= 1){imgPos = imgItems;}
+      //else{imgPos--;}
+      //$('.pagination li').css({'color':'#858585'});
+      //$('.pagination li:nth-child('+ imgPos +')').css({'color':'#ffff'});
+      //$('.slider li').hide();
+      //$('.slider li:nth-child('+ imgPos +')').fadeIn();
+  //}
+
+  //function nextSlider(){
+      //if(imgPos >= imgItems){imgPos = 1;}
+      //else{imgPos++;}
+      //$('.pagination li').css({'color':'#858585'});
+      //$('.pagination li:nth-child('+ imgPos +')').css({'color':'#ffff'});
+      //$('.slider li').hide();
+      //$('.slider li:nth-child('+ imgPos +')').fadeIn();
+  //}
 
 
   // Initiate the wowjs animation library

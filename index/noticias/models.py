@@ -1,9 +1,9 @@
 from ckeditor.fields import RichTextField
 from django.db import models
 import os
-from django.utils.safestring import mark_safe
 
 # Create your models here.
+from django.utils.safestring import mark_safe
 
 list_categoria = ['id', 'nombre']
 class Categorias(models.Model):
@@ -31,9 +31,9 @@ class Archivos(models.Model):
     formato = models.FileField(null=True, blank=True, upload_to=generate_path)
     enlace = models.CharField(max_length=500, null=True, blank=True)
 
-app_noticias = ['id', 'categoria', 'destacada', 'titulo', 'detalles', 'visitas']
+app_noticias = ['id', 'fecha', 'categoria', 'destacada', 'titulo', 'detalles', 'visitas']
 class Noticias(models.Model):
-    fecha = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    fecha = models.DateField(auto_now_add=True, null=True, blank=True)
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     etiqueta = models.ForeignKey(Etiquetas, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=120, help_text='Texto de no mas de 120 caracteres..!!', null=True, blank=True)
@@ -43,11 +43,9 @@ class Noticias(models.Model):
     metadatos = models.TextField(null=True, blank=True)
     detalle = RichTextField(null=True, blank=True)
 
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        if self.titulo:
-            self.titulo = str.upper(self.titulo)
-
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        #if self.titulo:
+            #self.titulo = str.lower(self.titulo)
         super(Noticias, self).save()
 
     def detalles(self):

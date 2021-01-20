@@ -62,7 +62,8 @@ def login_usuario(request):
 @login_required(login_url="/log_in/")
 def logout_usuario(request):
     auth.logout(request)
-    return render(request, "home/home.html")
+    #return render(request, "home/home.html")
+    return HttpResponseRedirect("/")
 
 # Email
 def verificacion_email(request):

@@ -32,7 +32,7 @@ urlpatterns = [
     #Home&register
     path('', Home, name="home"),
     path('noticias/', noticias, name="noticias"),
-    path("noticia/<int:n>/", detnoticia, name="detnoticia"),
+    path("noticia/<int:n>/", noticia, name="noticia"),
     #path('nosotros/', nosotros, name="nosotros"),
     #Login&register
     path('log_in/', login_usuario),

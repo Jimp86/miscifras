@@ -1,4 +1,4 @@
-{% extends 'home/hom.html' %}
+{% extends 'home/home.html' %}
 {% block intro %}{% endblock %}
 {% block contenido %}
     {%  load static %}
@@ -34,10 +34,10 @@
                                             <div class="post-grid post-grid-item">
                                                 <figure class="posts-thumb">
                                                     <span class="post-category">{{ noticia.categoria }}</span>
-                                                    <a href="{% url 'detnoticia' noticia.id %}"><img src="/media/{{ noticia.portada }}" style="width: 378px!important; height: 270px!important;" alt=""></a>
+                                                    <a href="{% url 'noticia' noticia.id %}"><img src="/media/{{ noticia.portada }}" style="width: 378px!important; height: 270px!important;" alt=""></a>
                                                 </figure>
                                                 <div class="posts-inner">
-                                                    <a href="{% url 'detnoticia' noticia.id %}" class="posts-link"></a>
+                                                    <a href="{% url 'noticia' noticia.id %}" class="posts-link"></a>
                                                      <ul class="authar-info">
                                                         <li><i class="ti-timer"></i> {{ noticia.fecha|date:"M d, Y" }}</li>
                                                         <li><a href="#" class="link"><i class="ti-thumb-up"></i>{{ noticia.visitas }} Visitas</a></li>
@@ -91,7 +91,7 @@
                                         <div class="most-viewed">
                                             <ul id="most-today" class="content tabs-content">
                                                 {% for popular in populares %}
-                                                    <li><span class="count">{{ forloop.counter }}</span><span class="text"><a href="{% url 'detnoticia' popular.id %}">{{ popular.titulo }}</a> ( {{ popular.visitas }} )</span></li>
+                                                    <li><span class="count">{{ forloop.counter }}</span><span class="text"><a href="{% url 'noticia' popular.id %}">{{ popular.titulo }}</a> ( {{ popular.visitas }} )</span></li>
                                                 {% endfor %}
                                             </ul>
                                         </div>

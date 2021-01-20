@@ -17,17 +17,20 @@
     <!-- Bootstrap CSS File -->
     <link rel="stylesheet" type="text/css" href="/static/lib/bootstrap/css/bootstrap.min.css">
     <!-- Libraries CSS Files -->
+    <link rel="stylesheet" type="text/css" href="/static/lib/jqueryui/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="/static/lib/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/static/lib/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="/static/lib/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" type="text/css" href="/static/lib/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/lib/owlcarousel/assets/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="/static/lib/magnific-popup/magnific-popup.css">
     <link rel="stylesheet" type="text/css" href="/static/lib/ionicons/css/ionicons.min.css">
+
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="/static/css/RYPP.css">
+    <!--link rel="stylesheet" type="text/css" href="/static/css/RYPP.css">
     <link rel="stylesheet" type="text/css" href="/static/css/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="/static/css/owl.transitions.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/owl.theme.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/owl.theme.css"-->
 
     <!-- Main Stylesheet File -->
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
@@ -161,54 +164,68 @@
           <!--========================== Noticias Section ============================-->
             <section id="noticias" class="wow fadeInUp">
               <div class="container">
-                <div class="section-header"><h2>Noticias</h2></div>
-                <p>Conoce las últimas novedades que estamos desarrollando</p>
+                <div class="section-header">
+                  <h2>Noticias</h2>
+                  <p>Conoce las últimas novedades que estamos desarrollando</p>
+                </div>
               </div>
               <div class="container">
-                <div class="row row-m">
+                <div class="row row-m">{# afecta columnas de noticias #}
                   <!-- START NOTICIAS -->
-                  <div class="col-sm-8 col-p main-content">
-                    <div class="theiaStickySidebar">
+                  <div class="col-sm-8 col-p main-content">{# bloque noticias recientes/destacadas #}
+                    {#<div class="theiaStickySidebar">#}
                       <!-- START POST CATEGORY STYLE ONE (Popular news) -->
                       <div class="post-inner">
                         <!-- post body -->
                         <div class="post-body">
-                          <!--div class="post-slider owl-carousel owl-theme"-->
+                          {# <div class="post-slider owl-carousel owl-theme"> afecta al bloque de noticias #}
                             <!-- item one -->
                             <div class="item">
                               <div class="row">
+                                {# Noticias Recientes #}
                                 <div class="col-sm-6 main-post-inner bord-right">
                                   <!--post header-->
                                   <div class="post-head">
                                     <h4 class="title"><strong>Recientes</strong></h4>
                                   </div>
                                     <br>
-                                  <article>
-                                    {% for noticia in recientes %}
-                                    <figure>
-                                      <a href="{%  url 'detnoticia' noticia.id %}"><img src="media/{{ noticia.portada }}" alt="" class="img-responsive"></a>
-                                      <span class="post-category">{{ noticia.categoria.nombre }}</span>
-                                    </figure>
-                                    <div class="post-info">
-                                      <h3><a href="#">{{ noticia.titulo }}</a></h3>
-                                      <ul class="authar-info">
-                                        <li><i class="ti-timer"></i>{{ noticia.fecha }}</li>
-                                        <!--li class="like"><a href="#"><i class="ti-thumb-up"></i>15 likes</a></li-->
-                                      </ul>
-                                      <p>{{ noticia.detalle }}</p>
+                                  {% for noticia in recientes %}
+                                  <div class="post-slider owl-carousel owl-theme">{# afecta al bloque de noticias #}
+                                    <div class="slider-noticias">
+                                      <article>
+                                        <figure>
+                                          <a><img src="media/{{ noticia.portada }}" alt="" class="img-responsive"></a>
+                                          <span class="post-category">{{ noticia.categoria.nombre }}</span>
+                                          <!--span class="left"><i class="fa fa-chevron-left"></i></span>
+                                          <span class="right"><i class="fa fa-chevron-right"></i></span-->
+                                          <!--ol class="pagination">
+                                            <li><span class="fa fa-circle"></span></li>
+                                          </ol-->
+                                        </figure>
+                                        <div class="post-info">
+                                        <h3><a href="{%  url 'noticia' noticia.id %}">{{ noticia.titulo }}</a></h3>
+                                        <ul class="authar-info">
+                                          <li><i class="ti-timer"></i>{{ noticia.fecha }}</li>
+                                          <!--li class="like"><a href="#"><i class="ti-thumb-up"></i>15 likes</a></li-->
+                                        </ul>
+                                        <p>{{ noticia.detalle }}</p>
+                                      </div>
+                                      </article>
                                     </div>
-                                    {% endfor %}
-                                  </article>
+                                  </div>
+                                  {% endfor %}
                                 </div>
+                                {# fin noticias recientes #}
+                                {# Noticias Destacadas #}
                                 <div class="col-sm-6">
                                   <!--post header-->
                                   <div class="post-head">
                                     <h4 class="title"><strong>Destacadas</strong></h4>
                                   </div>
                                     <br>
-                                  <div class="news-list">
+                                  {#% for not2 in destacadas %#}
+                                  {% comment %}<div class="news-list">
                                     <div class="news-list-item">
-                                      {% for not2 in destacadas %}
                                       <div class="img-wrapper">
                                         <a href="{%  url 'detnoticia' not2.id %}" class="thumb">
                                           <img src="media/{{ not2.portada }}" width="100" height="75" alt="" class="img-responsive">
@@ -224,71 +241,103 @@
                                           <!--li class="like hidden-xs hidden-sm"><a href="#"><i class="ti-thumb-up"></i>15 likes</a></li-->
                                         </ul>
                                       </div>
-                                      {% endfor %}
+                                    </div>
+                                  </div>{% endcomment %}
+                                  <div class="post-body">
+                                    <div class="item">
+                                      {#<div class="row">#}
+                                        <div class="news-grid-2">
+                                          <div class="row row-margin">
+                                            {% for noticia in destacadas %}
+                                              <div class="col-xs-6 col-sm-6 col-md-6 col-padding">
+                                                <div class="grid-item">
+                                                  <div class="grid-item-img">
+                                                    <a href="{%  url 'noticia' noticia.id %}">
+                                                      <img src="media/{{ noticia.portada }}" class="img-responsive" alt="">
+                                                      <div class="link-icon"><i class="fa fa-play"></i></div>
+                                                    </a>
+                                                  </div>
+                                                  <h5><a href="{%  url 'noticia' noticia.id %}" class="title">{{ noticia.titulo }}</a></h5>
+                                                  <ul class="authar-info">
+                                                    <li>{{ noticia.fecha }}</li>
+                                                    {# <li class="like hidden-sm"><a href="#">15 likes</a></li> #}
+                                                  </ul>
+                                                </div>
+                                              </div>
+                                            {% endfor %}
+                                          </div>
+                                        </div>
+                                      {#</div>#}
                                     </div>
                                   </div>
+                                  {#% endfor %#}
                                 </div>
+                                {# fin noticias destacadas #}
                               </div>
                             </div>
                           {# </div> #}
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    {#</div>#}
+                  </div>{# fin bloque de noticias #}
                   <!-- END NOTICIAS -->
                   <!-- START SIDE CONTENT -->
-                  <div class="col-sm-4 col-p rightSidebar">
-                        <div class="theiaStickySidebar">
-                            <!-- START LATEST REVIEWS -->
-                            <div class="panel_inner review-inner">
-                              <!--post header-->
-                              <div class="post-head">
-                                <h4 class="title"><strong>+ Vistas</strong></h4>
-                              </div>
-                                <br>
-                                <div class="panel_body">
-                                    {% comment %}<div class="more-post">
-                                        <a href="#" class="news-image"><img src="/static/img/portfolio/3.jpg" width="340" height="200" alt="" class="img-responsive"></a>
-                                        <!--div class="reatting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div-->
-                                        <div class="post-text">
-                                            <span class="post-category">Technology</span>
-                                            <h4>Lorem Ipsum is simply dummy text of the printing </h4>
-                                            <ul class="authar-info">
-                                                <li><i class="ti-timer"></i> May 15, 2016</li>
-                                                <li class="like"><a href="#"><i class="ti-thumb-up"></i>15 likes</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>{% endcomment %}
-                                    <div class="news-list">
-                                        <div class="news-list-item">
-                                      <div class="img-wrapper">
-                                        <a href="#" class="thumb">
-                                          <img src="/static/img/portfolio/2.jpg" height="75" width="100" alt="" class="img-responsive">
-                                          <div class="link-icon">
-                                            <i class="fa fa-camera"></i>
-                                          </div>
-                                        </a>
-                                      </div>
-                                      <div class="post-info-2">
-                                        <h5><a href="#" class="title">Cooking Recipes Anytime And Anywhere</a></h5>
-                                        <ul class="authar-info">
-                                          <li><i class="ti-timer"></i> May 15, 2016</li>
-                                          <li class="like hidden-xs hidden-sm"><a href="#"><i class="ti-thumb-up"></i>15 likes</a></li>
-                                        </ul>
-                                      </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END OF /. LATEST REVIEWS -->
+                  <div class="col-sm-4 col-p rightSidebar">{# bloque noticias +vistas #}
+                    {# <div class="theiaStickySidebar"> #}
+                      <!-- START LATEST REVIEWS -->
+                      <div class="panel_inner review-inner">
+                        <!--post header-->
+                        <div class="post-head">
+                          <h4 class="title"><strong>+ Vistas</strong></h4>
                         </div>
-                  </div>
+                        <br>
+                        <div class="panel_body">
+                          {% for noticia in populares %}
+                          <div class="more-post">
+                            <a href="{%  url 'noticia' noticia.id %}" class="news-image"><img src="media/{{ noticia.portada }}" {#width="340" height="215"#} alt="" class="img-responsive"></a>
+                            <!--div class="reatting">
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star-half-o"></i>
+                              <i class="fa fa-star-o"></i>
+                            </div-->
+                            <div class="post-text">
+                              <span class="post-category">{{ noticia.categoria.nombre }}</span>
+                              <h4>{{ noticia.titulo }}</h4>
+                              <ul class="authar-info">
+                                <li><i class="ti-timer"></i>{{ noticia.fecha }}</li>
+                                <li class="like"><a href="#"><i class="ti-thumb-up"></i>{{ noticia.visitas }} Visitas</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                          {% endfor %}
+                          <div class="news-list">
+                            {% for noticia in populares %}
+                            <div class="news-list-item">
+                              <div class="img-wrapper">
+                                <a href="{%  url 'noticia' noticia.id %}" class="thumb">
+                                <img src="media/{{ noticia.portada }}" {#height="75" width="100"#} alt="" class="img-responsive">
+                                <div class="link-icon">
+                                  <i class="fa fa-camera"></i>
+                                </div>
+                                </a>
+                              </div>
+                              <div class="post-info-2">
+                                <h5><a href="{%  url 'noticia' noticia.id %}" class="title">{{ noticia.titulo }}</a></h5>
+                                <ul class="authar-info">
+                                  <li>{#<i class="ti-timer"></i>#}{{ noticia.fecha }}</li>
+                                  <li class="like hidden-xs hidden-sm"><a href="#"><i class="ti-thumb-up"></i>{{ noticia.visitas }} Visitas</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                            {% endfor %}
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END OF /. LATEST REVIEWS -->
+                    {# </div> #}
+                  </div>{# fin noticias +vistas #}
                   <!-- END START SIDE -->
                 </div>
               </div>
@@ -305,7 +354,7 @@
               </div>
 
               <div class="container-fluid">
-                    <div class="row no-gutters">
+                  <div class="row no-gutters">
 
                       <div class="col-lg-3 col-md-4">
                         <div class="portfolio-item wow fadeInUp">
@@ -351,142 +400,14 @@
                         </div>
                       </div>
 
-                    </div>
                   </div>
+              </div>
             </section>
           <!-- #portfolio -->
 
-          {% comment %}<section id="" class="wow fadeInUp">
-              <div class="slider-inner">
-                <div class="container">
-                  <div class="row thm-margin">
-                    <div class="col-xs-6 col-sm-6 col-md-6 thm-padding">
-                      <div class="slider-wrapper">
-                        <div id="owl-slider" class="owl-carousel owl-theme">
-                          <!-- Slider item one -->
-
-                            <div class="item">
-                              <div class="slider-post post-height-1">
-                                <a href="/noticia/19/" class="news-image"><img src="media/noticias/portada/Uplogo2transparente-sinnombre_c22vIwP.png" alt="" class="img-responsive"></a>
-                                  <div class="post-text">
-                                    <span class="post-category">Noticias</span>
-
-                                    <h2><a href="#">CONTABILIDAD Y AUDITORÍA </a></h2>
-
-                                    <ul class="authar-info">
-                                      <li class="authar"><a href="#">por Usuario</a></li>
-                                      <li class="date">1 de Enero de 2021 a las 01:45</li>
-                                      <li class="view"><a href="#">1 Visitas</a></li>
-                                    </ul>
-                                  </div>
-                              </div>
-                            </div>
-
-                            <div class="item">
-                              <div class="slider-post post-height-1">
-                                <a href="/noticia/18/" class="news-image"><img src="media/noticias/portada/Negro_Blanco_Trottier_Ropa_Logotipo_kWpw1ea.png" alt="" class="img-responsive"></a>
-                                  <div class="post-text">
-                                    <span class="post-category">Noticias</span>
-
-                                    <h2><a href="#">FOTOGRAFO </a></h2>
-
-                                    <ul class="authar-info">
-                                      <li class="authar"><a href="#">por Usuario</a></li>
-                                      <li class="date">1 de Enero de 2021 a las 00:00</li>
-                                      <li class="view"><a href="#">1 Visitas</a></li>
-                                    </ul>
-                                  </div>
-                              </div>
-                            </div>
-
-                            <div class="item">
-                              <div class="slider-post post-height-1">
-                                <a href="/noticia/8/" class="news-image"><img src="media/noticias/portada/Mis_Cifras.png" alt="" class="img-responsive"></a>
-                                  <div class="post-text">
-                                    <span class="post-category">Noticias</span>
-
-                                    <h2><a href="#">MIS CIFRAS PREPARA SU NUEVA PLATAFORMA </a></h2>
-
-                                    <ul class="authar-info">
-                                      <li class="authar"><a href="#">por Usuario</a></li>
-                                      <li class="date">27 de Noviembre de 2020 a las 16:44</li>
-                                      <li class="view"><a href="#">12 Visitas</a></li>
-                                    </ul>
-                                  </div>
-                              </div>
-                            </div>
-
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-6 col-sm-6 col-md-6 thm-padding">
-                      <div class="slider-wrapper">
-                        <div id="owl-slider" class="owl-carousel owl-theme">
-                          <!-- Slider item one -->
-
-                          <div class="item">
-                            <div class="slider-post post-height-1">
-                              <a href="/noticia/19/" class="news-image"><img src="media/noticias/portada/Uplogo2transparente-sinnombre_c22vIwP.png" alt="" class="img-responsive"></a>
-                                <div class="post-text">
-                                  <span class="post-category">Noticias</span>
-
-                                  <h2><a href="#">CONTABILIDAD Y AUDITORÍA </a></h2>
-
-                                  <ul class="authar-info">
-                                    {<li class="authar"><a href="#">por Usuario Admin</a></li>}
-                                    <li class="date">1 de Enero de 2021 a las 01:45</li>
-                                    <li class="view"><a href="#">1 Visitas</a></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-
-                          <div class="item">
-                            <div class="slider-post post-height-1">
-                              <a href="/noticia/18/" class="news-image"><img src="media/noticias/portada/Negro_Blanco_Trottier_Ropa_Logotipo_kWpw1ea.png" alt="" class="img-responsive"></a>
-                                <div class="post-text">
-                                  <span class="post-category">Noticias</span>
-
-                                  <h2><a href="#">FOTOGRAFO </a></h2>
-
-                                  <ul class="authar-info">
-                                    {<li class="authar"><a href="#">por Usuario Admin</a></li>}
-                                    <li class="date">1 de Enero de 2021 a las 00:00</li>
-                                    <li class="view"><a href="#">1 Visitas</a></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-
-                          <div class="item">
-                            <div class="slider-post post-height-1">
-                              <a href="/noticia/8/" class="news-image"><img src="media/noticias/portada/Mis_Cifras.png" alt="" class="img-responsive"></a>
-                                <div class="post-text">
-                                  <span class="post-category">Noticias</span>
-
-                                  <h2><a href="#">MIS CIFRAS PREPARA SU NUEVA PLATAFORMA </a></h2>
-
-                                  <ul class="authar-info">
-                                    {<li class="authar"><a href="#">por Usuario Admin</a></li>}
-                                    <li class="date">27 de Noviembre de 2020 a las 16:44</li>
-                                    <li class="view"><a href="#">12 Visitas</a></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-            </section><!-- #News End -->{% endcomment %}
-
           <!--========================== About Section ============================-->
           <section id="about" class="wow fadeInUp">
-                <div class="container">
+              <div class="container">
                   <div class="section-header">
                     <h2>Nosotros</h2>
                     <p>Conoce mas detalles sobre nosotros y nuestro proyecto.</p>
@@ -497,8 +418,8 @@
                     <div class="col-lg-6">
                       <div class="box wow fadeInLeft">
                         <div class="icon"><i class="fa fa-bar-chart"></i></div>
-                        <h4 class="title"><a href="">¿Quienes Somos?</a></h4>
-                        <p class="description">Mis Cifras es un proyecto estadistico desarrollado por dizof, que busca crear un conjunto de herramientas.</p>
+                        <h4 class="title"><a href="">¿Qué Es?</a></h4>
+                        <p class="description">Mis Cifras es un proyecto estadístico desarrollado por dizof, que busca crear un conjunto de herramientas digitales para el manejo e interpretación de datos estadísticos.</p>
                       </div>
                     </div>
 
@@ -506,7 +427,7 @@
                       <div class="box wow fadeInRight">
                         <div class="icon"><i class="fa fa-picture-o"></i></div>
                         <h4 class="title"><a href="">Nosotros</a></h4>
-                        <p class="description"></p>
+                        <p class="description">Somos un grupo de entusiastas en el ámbito de la tecnología, programación y estadística, que busca crear aplicaciones y herramientas digitales para uso de todos los usuarios.</p>
                       </div>
                     </div>
 
@@ -514,7 +435,7 @@
                       <div class="box wow fadeInLeft" data-wow-delay="0.2s">
                         <div class="icon"><i class="fa fa-shopping-bag"></i></div>
                         <h4 class="title"><a href="">Misión</a></h4>
-                        <p class="description"></p>
+                        <p class="description">Consolidar un equipo de trabajo que nos permita fortalecer y diversificar nuestros servicios y plataforma de datos, generando confianza y oportunidad de aprendizaje.</p>
                       </div>
                     </div>
 
@@ -522,169 +443,14 @@
                       <div class="box wow fadeInRight" data-wow-delay="0.2s">
                         <div class="icon"><i class="fa fa-map"></i></div>
                         <h4 class="title"><a href="">Visión</a></h4>
-                        <p class="description"></p>
+                        <p class="description">Consolidar nuestro proyecto como una marca de confianza y referencia, que brinde soluciones eficientes y modernas a los requerimientos constantes del mercado.</p>
                       </div>
                     </div>
 
-                    </div>
-
-                  </div>
-              </section>
-          <!-- #services -->
-
-          <!--========================== Our Team Section ============================-->
-          <section id="team" class="wow fadeInUp">
-                    <div class="container">
-                        <div class="section-header">
-                            <h2>Partners</h2>
-                            <p>Somos un grupo de entusiastas por la tecnología e informática, que combinamos nuestros esfuerzos
-                                para desarrollar esta aplicación. </p>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6">
-                                <div class="member">
-                                    <div class="pic"><img src="/static/img/users/dizof.png" alt=""></div>
-                                    <div class="details">
-                                        <h4>Dizof</h4>
-                                        <span>Desarrollo & Programación</span>
-                                        <div class="social">
-                                            <a href=""><i class="fa fa-twitter"></i></a>
-                                            <a href=""><i class="fa fa-facebook"></i></a>
-                                            <a href=""><i class="fa fa-instagram"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 col-md-6">
-                                <div class="member">
-                                    <div class="pic"><img src="/static/img/users/dizof.png" alt=""></div>
-                                    <div class="details">
-                                        <h4>Filmers</h4>
-                                        <span>Contenidos Digitales</span>
-                                        <div class="social">
-                                            <a href=""><i class="fa fa-twitter"></i></a>
-                                            <a href=""><i class="fa fa-facebook"></i></a>
-                                            <a href=""><i class="fa fa-instagram"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 col-md-6">
-                                <div class="member">
-                                    <div class="pic"><img src="/static/img/users/dizof.png" alt=""></div>
-                                    <div class="details">
-                                        <h4>NodusNet </h4>
-                                        <span>Servicios Web</span>
-                                        <div class="social">
-                                            <a href=""><i class="fa fa-twitter"></i></a>
-                                            <a href=""><i class="fa fa-facebook"></i></a>
-                                            <a href=""><i class="fa fa-instagram"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 col-md-6">
-                                <div class="member">
-                                    <div class="pic"><img src="/static/img/users/dizof.png" alt=""></div>
-                                    <div class="details">
-                                        <h4>Bit</h4>
-                                        <span>Diseño</span>
-                                        <div class="social">
-                                            <a href=""><i class="fa fa-twitter"></i></a>
-                                            <a href=""><i class="fa fa-facebook"></i></a>
-                                            <a href=""><i class="fa fa-instagram"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
-          <!-- #team -->
-
-          <!--========================== Clients Section ============================-->
-          <section id="clients" class="wow fadeInUp">
-              <div class="container">
-                  <div class="section-header">
-                    <h2>Clientes</h2>
-                    <p>Estos son algunos de nuestros clientes que confian en nuestro trabajo y servicios, y nosostros siempre seremos un aliado estratégico para ellos.</p>
-                  </div>
-                  <div class="owl-carousel clients-carousel">
-                    <img src="/static/img/clients/vortice.png" alt="">
-                    <img src="/static/img/clients/girek.png" alt="">
-                    <img src="/static/img/clients/dizof.png" alt="">
-                    <img src="/static/img/clients/zatuar.png" alt="">
-                    <img src="/static/img/clients/bit.png" alt="">
-                    <img src="/static/img/clients/jacbel.png" alt="">
                   </div>
               </div>
-            </section>
-          <!-- #clients -->
-
-          <!--========================== Call To Action Section ============================-->
-          <section id="call-to-action" class="wow fadeInUp">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-lg-9 text-center text-lg-left">
-                      <h3 class="cta-title">¿Te Gusta lo que hacemos?</h3>
-                      <p class="cta-text"> Queremos consolidar un equipo de trabajo para seguir creciendo paso a paso cifra a cifra.</p>
-                    </div>
-                    <div class="col-lg-3 cta-btn-container text-center">
-                      <a class="cta-btn align-middle" href="#">Unete</a>
-                    </div>
-                  </div>
-                </div>
-            </section>
-          <!-- #call-to-action -->
-
-          <!--========================== Testimonials Section ============================-->
-          <section id="testimonials" class="wow fadeInUp">
-                  <div class="container">
-                    <div class="section-header">
-                      <h2>Testimonios</h2>
-                      <p>Estos son algunos de los comentarios que hemos recibido de parte de nuestros clientes y usuarios.</p>
-                    </div>
-                    <div class="owl-carousel testimonials-carousel">
-
-                        <div class="testimonial-item">
-                          <p>
-                            <img src="/static/img/quote-sign-left.png" class="quote-sign-left" alt="">
-                            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                            <img src="/static/img/quote-sign-right.png" class="quote-sign-right" alt="">
-                          </p>
-                          <img src="/static/img/testimonial-1.jpg" class="testimonial-img" alt="">
-                          <h3>Saul Goodman</h3>
-                          <h4>Ceo &amp; Founder</h4>
-                        </div>
-                        <div class="testimonial-item">
-                          <p>
-                            <img src="/static/img/quote-sign-left.png" class="quote-sign-left" alt="">
-                            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                            <img src="/static/img/quote-sign-right.png" class="quote-sign-right" alt="">
-                          </p>
-                          <img src="/static/img/testimonial-1.jpg" class="testimonial-img" alt="">
-                          <h3>Saul Goodman</h3>
-                          <h4>Ceo &amp; Founder</h4>
-                        </div>
-                        <div class="testimonial-item">
-                          <p>
-                            <img src="/static/img/quote-sign-left.png" class="quote-sign-left" alt="">
-                            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                            <img src="/static/img/quote-sign-right.png" class="quote-sign-right" alt="">
-                          </p>
-                          <img src="/static/img/testimonial-1.jpg" class="testimonial-img" alt="">
-                          <h3>Saul Goodman</h3>
-                          <h4>Ceo &amp; Founder</h4>
-                        </div>
-
-                    </div>
-                  </div>
-              </section>
-          <!--#testimonials -->
+          </section>
+          <!-- #about -->
 
           <!--========================== About Section ============================-->
           <!--section id="about" class="wow fadeInUp">
@@ -725,6 +491,162 @@
                   </div>
               </section-->
           <!-- #about -->
+
+          <!--========================== Our Team Section ============================-->
+          <section id="team" class="wow fadeInUp">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2>Partners</h2>
+                            <p>Somos un grupo de entusiastas por la tecnología e informática, que combinamos nuestros esfuerzos
+                                para desarrollar esta aplicación. </p>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="member">
+                                    <div class="pic"><img src="/static/img/partners/1.png" alt=""></div>
+                                    <div class="details">
+                                        {# <h4>Dizof</h4> #}
+                                        <span>Desarrollo & Programación</span>
+                                        <div class="social">
+                                            <a href=""><i class="fa fa-twitter"></i></a>
+                                            <a href=""><i class="fa fa-facebook"></i></a>
+                                            <a href=""><i class="fa fa-instagram"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6">
+                                <div class="member">
+                                    <div class="pic"><img src="/static/img/partners/5.png" alt=""></div>
+                                    <div class="details">
+                                        {# <h4>Filmers</h4> #}
+                                        <span>Contenidos Digitales</span>
+                                        <div class="social">
+                                            <a href=""><i class="fa fa-twitter"></i></a>
+                                            <a href=""><i class="fa fa-facebook"></i></a>
+                                            <a href=""><i class="fa fa-instagram"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6">
+                                <div class="member">
+                                    <div class="pic"><img src="/static/img/partners/4.png" alt=""></div>
+                                    <div class="details">
+                                        {# <h4>NodusNet</h4> #}
+                                        <span>Servicios Web</span>
+                                        <div class="social">
+                                            <a href=""><i class="fa fa-twitter"></i></a>
+                                            <a href=""><i class="fa fa-facebook"></i></a>
+                                            <a href=""><i class="fa fa-instagram"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6">
+                                <div class="member">
+                                    <div class="pic"><img src="/static/img/partners/6.png" alt=""></div>
+                                    <div class="details">
+                                        {# <h4>Bit</h4> #}
+                                        <span>Videos</span>
+                                        <div class="social">
+                                            <a href=""><i class="fa fa-twitter"></i></a>
+                                            <a href=""><i class="fa fa-facebook"></i></a>
+                                            <a href=""><i class="fa fa-instagram"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+          <!-- #team -->
+
+          <!--========================== Clients Section ============================-->
+          <section id="clients" class="wow fadeInUp">
+              <div class="container">
+                  <div class="section-header">
+                    <h2>Clientes</h2>
+                    <p>Estos son algunos de nuestros clientes que confian en nuestro trabajo y servicios, y nosostros siempre seremos un aliado estratégico para ellos.</p>
+                  </div>
+                  <div class="owl-carousel clients-carousel">
+                    <img src="/static/img/clients/vortice.png" alt="">
+                    <img src="/static/img/clients/girek.png" alt="">
+                    <img src="/static/img/clients/dizof.png" alt="">
+                    <img src="/static/img/clients/zatuar.png" alt="">
+                    <img src="/static/img/clients/bit.png" alt="">
+                    <img src="/static/img/clients/jacbel.png" alt="">
+                    <img src="/static/img/clients/jacbel.png" alt="">
+                    <img src="/static/img/clients/jacbel.png" alt="">
+                  </div>
+              </div>
+            </section>
+          <!-- #clients -->
+
+          <!--========================== Call To Action Section ============================-->
+          <section id="call-to-action" class="wow fadeInUp">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-9 text-center text-lg-left">
+                      <h3 class="cta-title">¿Te Gusta lo que hacemos?</h3>
+                      <p class="cta-text"> Queremos consolidar un equipo de trabajo para seguir creciendo paso a paso cifra a cifra.</p>
+                    </div>
+                    <div class="col-lg-3 cta-btn-container text-center">
+                      <a class="cta-btn align-middle" href="#">Unete</a>
+                    </div>
+                  </div>
+                </div>
+            </section>
+          <!-- #call-to-action -->
+
+          <!--========================== Testimonials Section ============================-->
+          <section id="testimonials" class="wow fadeInUp">
+              <div class="container">
+                    <div class="section-header">
+                      <h2>Testimonios</h2>
+                      <p>Estos son algunos de los comentarios que hemos recibido de parte de nuestros clientes y usuarios.</p>
+                    </div>
+                    <div class="owl-carousel testimonials-carousel">
+
+                        <div class="testimonial-item">
+                          <p>
+                            <img src="/static/img/quote-sign-left.png" class="quote-sign-left" alt="">
+                            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                            <img src="/static/img/quote-sign-right.png" class="quote-sign-right" alt="">
+                          </p>
+                          <img src="/static/img/testimonial-1.jpg" class="testimonial-img" alt="">
+                          <h3>Saul Goodman</h3>
+                          <h4>Ceo &amp; Founder</h4>
+                        </div>
+                        <div class="testimonial-item">
+                          <p>
+                            <img src="/static/img/quote-sign-left.png" class="quote-sign-left" alt="">
+                            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                            <img src="/static/img/quote-sign-right.png" class="quote-sign-right" alt="">
+                          </p>
+                          <img src="/static/img/testimonial-1.jpg" class="testimonial-img" alt="">
+                          <h3>Saul Goodman</h3>
+                          <h4>Ceo &amp; Founder</h4>
+                        </div>
+                        <div class="testimonial-item">
+                          <p>
+                            <img src="/static/img/quote-sign-left.png" class="quote-sign-left" alt="">
+                            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                            <img src="/static/img/quote-sign-right.png" class="quote-sign-right" alt="">
+                          </p>
+                          <img src="/static/img/testimonial-1.jpg" class="testimonial-img" alt="">
+                          <h3>Saul Goodman</h3>
+                          <h4>Ceo &amp; Founder</h4>
+                        </div>
+
+                    </div>
+              </div>
+          </section>
+          <!--#testimonials -->
 
           <!--========================== Contact Section ============================-->
           <section id="contact" class="wow fadeInUp">
@@ -840,8 +762,10 @@
 
         <!-- Template Main Javascript File -->
         <script src="/static/js/main.js"></script>
-
-        <!--script src="/static/js/owl.carousel.min.js"></script>
+        <script src="/static/js/custom.js"></script>{# revisar #}
+        <!--script src="/static/js/RYPP.js"></script>
+        <script src="/static/js/theia-sticky-sidebar.js"></script>{# slider revisar #}
+        <script src="/static/js/owl.carousel.min.js"></script-->
 
         <!-- Login Javascript File -->
         <!--script src="/static/js/acciones.js"></script-->

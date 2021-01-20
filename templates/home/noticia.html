@@ -1,7 +1,7 @@
-{% extends 'home/hom.html' %}
+{% extends 'home/home.html' %}
 {% block intro %}{%  endblock %}
 {% block meta %}
-<meta property="og:url"           content="{% url 'detnoticia' noticia.id %}">
+<meta property="og:url"           content="{% url 'noticia' noticia.id %}">
 <meta property="og:type"          content="website">
 <meta property="og:title"         content="{{ noticia.titulo }}">
 <meta property="og:description"   content="{{ noticia.metadatos }}">
@@ -33,7 +33,7 @@
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <ol class="breadcrumb">
                                 <li><a href="/">Inicio</a></li>
-                                <li class="active"><a href="{% url 'detnoticia' noticia.id %}"> noticias</a></li>
+                                <li class="active"><a href="{% url 'noticia' noticia.id %}"> noticias</a></li>
                             </ol>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                                         <div class="most-viewed">
                                             <ul id="most-today" class="content tabs-content">
                                                {% for popular in populares %}
-                                                    <li><span class="count">{{ forloop.counter }}</span><span class="text"><a href="{% url 'detnoticia' popular.id %}">{{ popular.titulo }}</a> ( {{ popular.visitas }} )</span></li>
+                                                    <li><span class="count">{{ forloop.counter }}</span><span class="text"><a href="{% url 'noticia' popular.id %}">{{ popular.titulo }}</a> ( {{ popular.visitas }} )</span></li>
                                                 {% endfor %}
                                             </ul>
                                         </div>

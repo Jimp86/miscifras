@@ -208,7 +208,7 @@
                                           <li><i class="ti-timer"></i>{{ noticia.fecha }}</li>
                                           <!--li class="like"><a href="#"><i class="ti-thumb-up"></i>15 likes</a></li-->
                                         </ul>
-                                        <p>{{ noticia.detalle }}</p>
+                                        <p>{{ noticia.detalle|safe|truncatechars_html:300 }}</p>
                                       </div>
                                       </article>
                                     </div>
